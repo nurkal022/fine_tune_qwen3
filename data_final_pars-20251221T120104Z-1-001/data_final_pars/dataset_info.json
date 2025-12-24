@@ -1,0 +1,63 @@
+{
+  "name": "Kazakhstan Legal Q&A Dataset",
+  "description": "Датасет юридических вопросов и ответов по законодательству Республики Казахстан",
+  "language": "ru",
+  "total_records": 27070,
+  "created_date": "2024-12-17",
+  "sources": [
+    {
+      "name": "dogovor24",
+      "url": "https://dogovor24.kz/questions",
+      "records": 21999,
+      "description": "Крупнейший казахстанский портал юридических консультаций"
+    },
+    {
+      "name": "jurhelp",
+      "url": "https://jurhelp.prg.kz",
+      "records": 2918,
+      "description": "Юридическая помощь онлайн"
+    },
+    {
+      "name": "yurkz",
+      "url": "https://yur.kz/questions",
+      "records": 1658,
+      "description": "Сервис поиска юристов в Казахстане"
+    },
+    {
+      "name": "pravosite",
+      "url": "https://pravosite.kz/questions",
+      "records": 495,
+      "description": "Юридический онлайн-сервис"
+    }
+  ],
+  "files": {
+    "training_data.jsonl": "JSONL формат для fine-tuning LLM",
+    "all_data.json": "Полный JSON массив",
+    "training_data.txt": "Читаемый текстовый формат"
+  },
+  "schema": {
+    "instruction": "Системный промпт",
+    "input": "Вопрос пользователя",
+    "output": "Ответ юриста",
+    "metadata": {
+      "id": "Уникальный идентификатор",
+      "url": "URL источника",
+      "title": "Заголовок",
+      "date": "Дата публикации",
+      "category": "Категория",
+      "source": "Источник данных"
+    }
+  },
+  "categories": [
+    "Семейное право",
+    "Трудовое право",
+    "Гражданское право",
+    "Жилищное право",
+    "Земельное право",
+    "Наследственное право",
+    "Административное право",
+    "Уголовное право",
+    "Банкротство",
+    "Исполнительное производство"
+  ]
+}
