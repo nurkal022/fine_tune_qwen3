@@ -14,6 +14,7 @@ __pycache__/
 # Training outputs & checkpoints
 outputs/
 outputs_8b/
+outputs_32b/
 
 # Cached models
 unsloth_compiled_cache/
@@ -21,7 +22,9 @@ datasetTranslate/models/
 
 # Trained models (upload to HuggingFace separately)
 finetuned_qwen3_8b/
+finetuned_qwen3_32b/
 lora_qwen3_8b/
+lora_qwen3_32b/
 
 # OS
 .DS_Store
