@@ -6,22 +6,41 @@ __pycache__/
 .Python
 *.egg-info/
 .eggs/
+*.egg
+
+# Virtual environment
+venv/
+env/
+.venv/
 
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
 
-# Training outputs & checkpoints
-outputs/
+# Training outputs & checkpoints (large files)
+outputs*/
 outputs_8b/
+outputs_14b/
+outputs_14b_8bit/
+outputs_14b_16bit/
+outputs_32b/
 
 # Cached models
 unsloth_compiled_cache/
 datasetTranslate/models/
 
 # Trained models (upload to HuggingFace separately)
-finetuned_qwen3_8b/
-lora_qwen3_8b/
+finetuned_qwen3_*/
+lora_qwen3_*/
+
+# xformers (compiled from source)
+xformers/
+
+# Benchmark results
+benchmark_results_*.json
+
+# Garbage files from pip
+=*
 
 # OS
 .DS_Store
@@ -38,4 +57,15 @@ Thumbs.db
 # Logs
 *.log
 wandb/
+runs/
 
+# Large data files (keep structure, ignore large files)
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+*.pth
+
+# Keep these data files (small enough)
+!finetune_dataset/*.jsonl
+!combined_data/*.jsonl

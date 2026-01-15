@@ -1,103 +1,153 @@
-# Fine-tuning Qwen3-8B
+# Fine-tuning Qwen3-14B для казахстанского законодательства
 
-Fine-tuning Qwen3-8B модели на казахстанском законодательстве с использованием Unsloth и LoRA.
+Fine-tuned Qwen3-14B модель на ~36,000 примерах казахстанского законодательства с использованием Unsloth + LoRA.
+
+## Результаты обучения
+
+| Параметр | Значение |
+|----------|----------|
+| Базовая модель | `Qwen/Qwen3-14B` |
+| Метод | LoRA (16-bit bf16) |
+| Датасет | 32,440 train / 3,606 validation |
+| Эпохи | 3 |
+| Шаги | 21,303 |
+| GPU | RTX 5090 (32GB) |
+| Время обучения | ~15 часов |
 
 ## Структура проекта
 
 ```
-├── train_8b.py          # Основной скрипт обучения Qwen3-8B
-├── train.py             # Скрипт обучения Qwen3-14B
-├── config.py            # Конфигурация модели и обучения
-├── prepare_data.py      # Подготовка и объединение датасетов
-├── inference.py         # Инференс обученной модели
-├── chat.py              # Интерактивный чат с моделью
-├── test_8b.py           # Тестирование модели
-├── export_model.py      # Экспорт модели
-├── run_training.sh      # Bash скрипт для запуска обучения
-├── combined_data/       # Объединённые датасеты
-├── finetune_dataset/    # Исходный датасет для обучения
-├── data_final_pars*/    # Дополнительные данные
-└── datasetTranslate/    # Утилиты для перевода датасета
+├── train_32b.py          # Основной скрипт обучения Qwen3-14B (16-bit)
+├── train_8b.py           # Скрипт обучения Qwen3-8B (4-bit)
+├── test_14b_chat.py      # Интерактивный чат с обученной моделью
+├── benchy.py             # Бенчмарк модели
+├── prepare_data.py       # Подготовка датасетов
+├── requirements.txt      # Зависимости
+├── finetune_dataset/     # Основной датасет
+│   ├── train.jsonl       # 32,440 примеров
+│   └── validation.jsonl  # 3,606 примеров
+└── combined_data/        # Объединённые данные
 ```
 
 ## Требования
 
 - Python 3.10+
 - CUDA 12.0+
-- GPU с 16GB+ VRAM (RTX 4080/5080 или выше)
+- GPU с 24GB+ VRAM (RTX 4090/5090)
 
-### Установка зависимостей
+## Установка
 
 ```bash
+# Создание виртуального окружения
+python -m venv venv
+source venv/bin/activate
+
+# Установка зависимостей
 pip install unsloth
-pip install transformers datasets trl peft
+pip install -r requirements.txt
 ```
 
 ## Использование
 
-### 1. Подготовка данных
+### Обучение модели
 
 ```bash
-python prepare_data.py
+# 14B модель (16-bit, ~30GB VRAM)
+CUDA_VISIBLE_DEVICES=0 python train_32b.py
+
+# 8B модель (4-bit, ~12GB VRAM)
+CUDA_VISIBLE_DEVICES=0 python train_8b.py
 ```
 
-### 2. Запуск обучения
+### Тестирование обученной модели
 
 ```bash
-python train_8b.py
+python test_14b_chat.py
 ```
 
-Или через bash скрипт:
+Команды в чате:
+- `exit` — выход
+- `test` — запустить тестовые примеры
+- `temp 0.5` — изменить temperature
+
+### Бенчмарк
 
 ```bash
-./run_training.sh
+python benchy.py
 ```
 
-### 3. Тестирование модели
+## Конфигурация обучения
 
-```bash
-python test_8b.py
-```
-
-### 4. Интерактивный чат
-
-```bash
-python chat.py
-```
-
-## Конфигурация
-
-Основные параметры в `train_8b.py`:
-
-| Параметр | Значение | Описание |
-|----------|----------|----------|
-| MODEL_NAME | `unsloth/Qwen3-8B-unsloth-bnb-4bit` | Базовая модель |
-| MAX_SEQ_LENGTH | 2048 | Максимальная длина последовательности |
-| LORA_R | 16 | Ранг LoRA |
-| LORA_ALPHA | 16 | Alpha LoRA |
-| BATCH_SIZE | 2 | Размер батча |
-| GRAD_ACCUM | 4 | Градиентная аккумуляция |
-| LEARNING_RATE | 2e-4 | Скорость обучения |
+| Параметр | 14B (16-bit) | 8B (4-bit) |
+|----------|--------------|------------|
+| MAX_SEQ_LENGTH | 2048 | 2048 |
+| LORA_R | 16 | 16 |
+| LORA_ALPHA | 16 | 16 |
+| BATCH_SIZE | 1 | 2 |
+| GRAD_ACCUM | 8 | 4 |
+| LEARNING_RATE | 2e-4 | 2e-4 |
+| NUM_EPOCHS | 3 | 3 |
 
 ## Формат данных
 
-Датасет в формате JSONL с полями:
+JSONL с Alpaca форматом:
 
 ```json
 {
-  "instruction": "Ваш вопрос или инструкция",
-  "input": "Дополнительный контекст (опционально)",
-  "output": "Ожидаемый ответ"
+  "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+  "input": "Можно ли заключить договор ГПХ с указанием цены работы за сутки?",
+  "output": "Согласно законодательству РК..."
 }
 ```
 
-## Результаты
+## Обученные модели
 
-После обучения модель сохраняется в:
-- `finetuned_qwen3_8b/` — полная модель с адаптерами
-- `lora_qwen3_8b/` — только LoRA адаптеры
+После обучения модели сохраняются в:
+- `outputs_14b_16bit/checkpoint-21303/` — чекпоинты
+- `finetuned_qwen3_14b_16bit/` — финальная модель
+- `lora_qwen3_14b_16bit/` — только LoRA адаптеры
+
+### Загрузка на HuggingFace
+
+```bash
+# Установка huggingface-cli
+pip install huggingface_hub
+
+# Логин
+huggingface-cli login
+
+# Загрузка LoRA адаптеров
+huggingface-cli upload YOUR_USERNAME/qwen3-14b-kz-law-lora ./lora_qwen3_14b_16bit
+```
+
+## Пример использования
+
+```python
+from unsloth import FastLanguageModel
+
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name="outputs_14b_16bit/checkpoint-21303",
+    max_seq_length=2048,
+    load_in_4bit=True,
+)
+FastLanguageModel.for_inference(model)
+
+prompt = """Below is an instruction that describes a task, paired with an input that provides further context.
+
+### Instruction:
+Ответь на вопрос по казахстанскому законодательству.
+
+### Input:
+Какие права имеют работники при увольнении?
+
+### Response:
+"""
+
+inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
+outputs = model.generate(**inputs, max_new_tokens=512)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+```
 
 ## Лицензия
 
 MIT
-
