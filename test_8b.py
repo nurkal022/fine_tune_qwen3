@@ -4,7 +4,7 @@
 from unsloth import FastLanguageModel
 from transformers import TextStreamer
 
-MODEL_PATH = "finetuned_qwen3_8b"
+MODEL_PATH = "outputs_14b_16bit/checkpoint-21303"
 MAX_SEQ_LENGTH = 2048
 
 ALPACA_PROMPT = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
