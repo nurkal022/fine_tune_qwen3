@@ -38,7 +38,7 @@ except ImportError:
 # ============== КОНФИГУРАЦИЯ ==============
 
 # Путь к обученной модели
-MODEL_PATH = "finetuned_qwen3_14b_16bit"  # Измени на свой путь
+MODEL_PATH = "finetuned_qwen3_8b"  # Обученная 8B модель
 
 # Датасет для тестирования
 VAL_FILE = "combined_data/validation.jsonl"

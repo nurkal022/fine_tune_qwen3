@@ -36,9 +36,6 @@ lora_qwen3_*/
 # xformers (compiled from source)
 xformers/
 
-# Benchmark results
-benchmark_results_*.json
-
 # Garbage files from pip
 =*
 
