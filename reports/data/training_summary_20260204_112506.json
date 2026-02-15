@@ -1,0 +1,44 @@
+{
+  "config": {
+    "model_name": "unsloth/Qwen3-8B-unsloth-bnb-4bit",
+    "max_seq_length": 2048,
+    "load_in_4bit": true,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "batch_size": 2,
+    "grad_accum": 4,
+    "effective_batch": 8,
+    "num_epochs": 3,
+    "learning_rate": 0.0002,
+    "save_steps": 1000,
+    "logging_steps": 50
+  },
+  "training": {
+    "train_runtime": 86147.32,
+    "train_samples_per_second": 1.978,
+    "train_steps_per_second": 0.247,
+    "total_flos": 2.44602265923883e+18,
+    "train_loss": 0.7055370585322912,
+    "epoch": 3.0
+  },
+  "benchmark": {
+    "model_path": "finetuned_qwen3_8b",
+    "num_samples": 100,
+    "total_time": 362.49344968795776,
+    "metrics": {
+      "exact_match": 0.01,
+      "token_f1": 0.2670522718299143,
+      "length_ratio": 0.7364586706087063,
+      "key_info": 0.774454365079365,
+      "gen_time": 3.6249344968795776
+    }
+  },
+  "loss_stats": {
+    "initial_loss": 1.8544,
+    "final_loss": 0.5631,
+    "min_loss": 0.5351,
+    "max_loss": 1.8544,
+    "loss_reduction": 69.63438308886973,
+    "total_steps": 426
+  }
+}
