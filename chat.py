@@ -1,62 +1,61 @@
 """
-Интерактивный чат с обученной моделью Qwen3-8B
+Интерактивный чат с обученной моделью
 """
+import argparse
 from unsloth import FastLanguageModel
 from transformers import TextStreamer
 
-MODEL_PATH = "finetuned_qwen3_8b"
+from config import ALPACA_PROMPT
+
 MAX_SEQ_LENGTH = 2048
 
-ALPACA_PROMPT = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-
-### Instruction:
-{}
-
-### Input:
-{}
-
-### Response:
-{}"""
 
 def main():
+    parser = argparse.ArgumentParser(description='Chat with fine-tuned model')
+    parser.add_argument('--model', type=str, default='lora_qwen3_8b', help='Path to model')
+    args = parser.parse_args()
+
     print("=" * 60)
-    print("Загрузка модели...")
+    print(f"Loading model: {args.model}")
     print("=" * 60)
-    
+
     model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name=MODEL_PATH,
+        model_name=args.model,
         max_seq_length=MAX_SEQ_LENGTH,
         dtype=None,
         load_in_4bit=True,
     )
     FastLanguageModel.for_inference(model)
-    
-    print("✅ Модель загружена!\n")
-    
+    print("Model loaded!\n")
+
     print("=" * 60)
-    print("ИНТЕРАКТИВНЫЙ ЧАТ")
-    print("Введите 'exit' или 'quit' для выхода")
+    print("INTERACTIVE CHAT")
+    print("Type 'exit' or 'quit' to leave")
     print("=" * 60)
-    
+
     streamer = TextStreamer(tokenizer, skip_prompt=True)
-    
+
     while True:
         print("\n" + "-" * 60)
-        instruction = input("💬 Ваш вопрос: ").strip()
-        
-        if instruction.lower() in ['exit', 'quit', 'выход']:
-            print("\nДо свидания!")
+        try:
+            instruction = input("Question: ").strip()
+        except (KeyboardInterrupt, EOFError):
+            print("\nBye!")
             break
-        
+
+        if instruction.lower() in ['exit', 'quit']:
+            print("Bye!")
+            break
+
         if not instruction:
             continue
-        
-        input_text = input("📝 Контекст (Enter для пропуска): ").strip()
-        
+
+        input_text = input("Context (Enter to skip): ").strip()
+
         prompt = ALPACA_PROMPT.format(instruction, input_text, "")
         inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
-        
-        print("\n🤖 Ответ:")
+
+        print("\nResponse:")
         print("-" * 60)
         _ = model.generate(
             **inputs,
@@ -68,6 +67,6 @@ def main():
         )
         print("-" * 60)
 
+
 if __name__ == "__main__":
     main()
-

@@ -1,81 +1,50 @@
 """
 Fine-tuning Qwen3-14B с Unsloth
-16-bit (bf16) LoRA на RTX 5090 (32GB) - максимальное качество, без квантизации
+16-bit (bf16) LoRA на RTX 5090 (32GB) - без квантизации
 """
 import torch
+from functools import partial
+
 from unsloth import FastLanguageModel
 from datasets import load_dataset
 from trl import SFTConfig, SFTTrainer
 
-# ============== КОНФИГУРАЦИЯ ==============
-MODEL_NAME = "Qwen/Qwen3-14B"  # Базовая модель
-MAX_SEQ_LENGTH = 2048
-# 16-bit (bf16) — без квантизации, максимальное качество
-# Займёт ~28-30GB VRAM
+from config import TRAIN_FILE, VAL_FILE, TARGET_MODULES
+from utils import print_gpu_info, format_dataset
 
-# LoRA
+# ============== КОНФИГУРАЦИЯ ==============
+MODEL_NAME = "Qwen/Qwen3-14B"
+MAX_SEQ_LENGTH = 2048
+
 LORA_R = 16
 LORA_ALPHA = 16
 LORA_DROPOUT = 0
-TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
-# Training
-OUTPUT_DIR = "outputs_14b_16bit"  # 16-bit версия
-BATCH_SIZE = 1  # уменьшено для 16-bit (больше памяти)
+OUTPUT_DIR = "outputs_14b_16bit"
+BATCH_SIZE = 1
 GRAD_ACCUM = 8  # эффективный batch = 8
-NUM_EPOCHS = 3  # увеличено для лучшего обучения
+NUM_EPOCHS = 3
 LEARNING_RATE = 2e-4
 SAVE_STEPS = 500
 LOGGING_STEPS = 10
 
-# Расчёт времени (примерно)
-# 16-bit медленнее 4-bit, но качество лучше
-# Ожидаемое время: ~12-15 часов на 3 эпохи
-
-# Data
-TRAIN_FILE = "combined_data/train.jsonl"
-VAL_FILE = "combined_data/validation.jsonl"
-
-# Prompt template
-ALPACA_PROMPT = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-
-### Instruction:
-{}
-
-### Input:
-{}
-
-### Response:
-{}"""
-
-# ============== ФУНКЦИИ ==============
-
-def print_gpu_info():
-    if torch.cuda.is_available():
-        for i in range(torch.cuda.device_count()):
-            gpu = torch.cuda.get_device_properties(i)
-            reserved = round(torch.cuda.memory_reserved(i) / 1024**3, 2)
-            allocated = round(torch.cuda.memory_allocated(i) / 1024**3, 2)
-            total = round(gpu.total_memory / 1024**3, 2)
-            print(f"GPU {i}: {gpu.name} | {allocated}/{total} GB allocated")
 
 def main():
     print("=" * 60)
     print("Fine-tuning Qwen3-14B (16-bit bf16 LoRA)")
     print("=" * 60)
     print_gpu_info()
-    
+
     # 1. Загрузка модели
     print("\n[1/5] Загрузка модели Qwen3-14B (16-bit bf16)...")
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=MODEL_NAME,
         max_seq_length=MAX_SEQ_LENGTH,
-        dtype=torch.bfloat16,  # 16-bit без квантизации
+        dtype=torch.bfloat16,
         load_in_4bit=False,
     )
-    
     print_gpu_info()
-    
+
     # 2. LoRA
     print("\n[2/5] Применение LoRA...")
     model = FastLanguageModel.get_peft_model(
@@ -88,37 +57,20 @@ def main():
         use_gradient_checkpointing="unsloth",
         random_state=3407,
     )
-    
+
     # 3. Датасет
     print("\n[3/5] Загрузка датасета...")
-    EOS_TOKEN = tokenizer.eos_token
-    
-    def formatting_func(examples):
-        texts = []
-        for instr, inp, out in zip(examples["instruction"], examples["input"], examples["output"]):
-            texts.append(ALPACA_PROMPT.format(instr, inp, out) + EOS_TOKEN)
-        return {"text": texts}
-    
     dataset = load_dataset("json", data_files={"train": TRAIN_FILE, "validation": VAL_FILE})
-    train_dataset = dataset["train"].map(formatting_func, batched=True)
-    
+    train_dataset = dataset["train"].map(
+        partial(format_dataset, eos_token=tokenizer.eos_token), batched=True
+    )
+
     print(f"  Train: {len(train_dataset)} samples")
-    print(f"  Effective batch size: {BATCH_SIZE * GRAD_ACCUM}")
-    
-    # Расчёт времени обучения
+    print(f"  Effective batch: {BATCH_SIZE * GRAD_ACCUM}")
+
     steps_per_epoch = len(train_dataset) // (BATCH_SIZE * GRAD_ACCUM)
-    total_steps = steps_per_epoch * NUM_EPOCHS
-    estimated_time_per_step = 1.5  # секунд (примерно)
-    estimated_total_time = total_steps * estimated_time_per_step
-    estimated_hours = int(estimated_total_time // 3600)
-    estimated_mins = int((estimated_total_time % 3600) // 60)
-    
-    print(f"\n  📊 Прогноз обучения:")
-    print(f"     Эпох: {NUM_EPOCHS}")
-    print(f"     Шагов на эпоху: {steps_per_epoch}")
-    print(f"     Всего шагов: {total_steps}")
-    print(f"     Примерное время: ~{estimated_hours}ч {estimated_mins}мин")
-    
+    print(f"  Steps/epoch: {steps_per_epoch}, Total: {steps_per_epoch * NUM_EPOCHS}")
+
     # 4. Trainer
     print("\n[4/5] Инициализация тренера...")
     trainer = SFTTrainer(
@@ -146,33 +98,25 @@ def main():
             bf16=True,
         ),
     )
-    
     print_gpu_info()
-    
+
     # 5. Train
     print("\n[5/5] Запуск обучения...")
     print("=" * 60)
     stats = trainer.train()
     print("=" * 60)
-    
+
     runtime = stats.metrics['train_runtime']
-    hours = int(runtime // 3600)
-    mins = int((runtime % 3600) // 60)
-    print(f"\nВремя: {hours}ч {mins}мин ({runtime:.0f} сек)")
+    print(f"\nВремя: {int(runtime // 3600)}h {int((runtime % 3600) // 60)}min")
     print_gpu_info()
-    
+
     # Save
-    print("\nСохранение модели...")
-    model.save_pretrained("finetuned_qwen3_14b_16bit")
-    tokenizer.save_pretrained("finetuned_qwen3_14b_16bit")
-    
-    # LoRA only
+    print("\nСохранение...")
     model.save_pretrained("lora_qwen3_14b_16bit")
     tokenizer.save_pretrained("lora_qwen3_14b_16bit")
-    
-    print("\nГотово!")
-    print(f"  Модель: finetuned_qwen3_14b_16bit/")
-    print(f"  LoRA: lora_qwen3_14b_16bit/")
+    print("  LoRA: lora_qwen3_14b_16bit/")
+    print("Готово!")
+
 
 if __name__ == "__main__":
     main()

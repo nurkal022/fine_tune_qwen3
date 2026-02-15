@@ -17,27 +17,18 @@ env/
 .ipynb_checkpoints/
 *.ipynb
 
-# Training outputs & checkpoints (large files)
+# Training outputs & checkpoints
 outputs*/
-outputs_8b/
-outputs_14b/
-outputs_14b_8bit/
-outputs_14b_16bit/
-outputs_32b/
 
 # Cached models
 unsloth_compiled_cache/
-datasetTranslate/models/
 
 # Trained models (upload to HuggingFace separately)
 finetuned_qwen3_*/
 lora_qwen3_*/
 
-# xformers (compiled from source)
+# xformers
 xformers/
-
-# Garbage files from pip
-=*
 
 # OS
 .DS_Store
@@ -53,16 +44,27 @@ Thumbs.db
 
 # Logs
 *.log
+logs/
 wandb/
 runs/
 
-# Large data files (keep structure, ignore large files)
+# Large model files
 *.safetensors
 *.bin
 *.pt
 *.ckpt
 *.pth
 
-# Keep these data files (small enough)
+# Generated artifacts
+benchmark_results_*.json
+training_summary_*.json
+ds_config.json
+reports/
+reports.zip
+
+# Garbage files from pip
+=*
+
+# Keep data files (small enough for git)
 !finetune_dataset/*.jsonl
 !combined_data/*.jsonl

@@ -1,96 +1,92 @@
-# Fine-tuning Qwen3-14B для казахстанского законодательства
+# Fine-tuning Qwen3 for Kazakhstan Legal Domain
 
-Fine-tuned Qwen3-14B модель на ~36,000 примерах казахстанского законодательства с использованием Unsloth + LoRA.
+Fine-tuning Qwen3 models (8B/14B/32B) on ~57,000 examples of Kazakhstan legislation using LoRA.
 
-## Результаты обучения
+## Results (Qwen3-8B)
 
-| Параметр | Значение |
-|----------|----------|
-| Базовая модель | `Qwen/Qwen3-14B` |
-| Метод | LoRA (16-bit bf16) |
-| Датасет | 32,440 train / 3,606 validation |
-| Эпохи | 3 |
-| Шаги | 21,303 |
-| GPU | RTX 5090 (32GB) |
-| Время обучения | ~15 часов |
+| Metric | Value |
+|--------|-------|
+| Initial Loss | 1.8544 |
+| Final Loss | 0.5734 |
+| Loss Reduction | 69.1% |
+| Key Info Score | 77.45% |
+| Training Time | ~24 hours |
+| GPU | RTX 5080 (16GB) |
 
-## Структура проекта
+See [RESULTS.md](RESULTS.md) for detailed benchmarks and plots.
+
+## Project Structure
 
 ```
-├── train_32b.py          # Основной скрипт обучения Qwen3-14B (16-bit)
-├── train_8b.py           # Скрипт обучения Qwen3-8B (4-bit)
-├── test_14b_chat.py      # Интерактивный чат с обученной моделью
-├── benchy.py             # Бенчмарк модели
-├── prepare_data.py       # Подготовка датасетов
-├── requirements.txt      # Зависимости
-├── finetune_dataset/     # Основной датасет
-│   ├── train.jsonl       # 32,440 примеров
-│   └── validation.jsonl  # 3,606 примеров
-└── combined_data/        # Объединённые данные
+config.py                 # Shared config: ALPACA_PROMPT, paths, LoRA params
+utils.py                  # Shared utilities: gpu_info, dataset formatting
+prepare_data.py           # Dataset preparation & merging
+
+train_8b.py               # Qwen3-8B  (4-bit Unsloth, RTX 5080 16GB)
+train_14b.py              # Qwen3-14B (bf16 Unsloth, RTX 5090 32GB)
+train_32b_native.py       # Qwen3-32B (4-bit QLoRA, native transformers)
+train_32b_deepspeed.py    # Qwen3-32B (bf16 DeepSpeed ZeRO-3, 2x RTX 5090)
+
+chat.py                   # Interactive chat with trained model
+inference.py              # Batch inference & test examples
+benchmark.py              # Model evaluation (ROUGE, BLEU, Token F1)
+generate_plots.py         # Training loss & benchmark visualization
+export_model.py           # Export to GGUF / 16bit / 4bit
+
+setup_env.sh              # Environment setup for RTX 5090
+run_training.sh           # Training launcher
+
+combined_data/            # Training dataset (57K train / 6K val)
+finetune_dataset/         # Original dataset source
 ```
 
-## Требования
+## Requirements
 
 - Python 3.10+
 - CUDA 12.0+
-- GPU с 24GB+ VRAM (RTX 4090/5090)
+- GPU: RTX 5080 (16GB) for 8B, RTX 5090 (32GB) for 14B/32B
 
-## Установка
+## Setup
 
 ```bash
-# Создание виртуального окружения
 python -m venv venv
 source venv/bin/activate
-
-# Установка зависимостей
 pip install unsloth
 pip install -r requirements.txt
 ```
 
-## Использование
-
-### Обучение модели
+## Training
 
 ```bash
-# 14B модель (16-bit, ~30GB VRAM)
-CUDA_VISIBLE_DEVICES=0 python train_32b.py
+# 8B model (4-bit, ~16GB VRAM)
+python train_8b.py
 
-# 8B модель (4-bit, ~12GB VRAM)
-CUDA_VISIBLE_DEVICES=0 python train_8b.py
+# 14B model (bf16, ~30GB VRAM)
+python train_14b.py
+
+# 32B model (4-bit QLoRA, ~30GB VRAM)
+python train_32b_native.py
+
+# 32B model (DeepSpeed, 2x GPU)
+deepspeed --num_gpus=2 train_32b_deepspeed.py
 ```
 
-### Тестирование обученной модели
+## Inference
 
 ```bash
-python test_14b_chat.py
+# Interactive chat
+python chat.py --model lora_qwen3_8b
+
+# Benchmark
+python benchmark.py
+
+# Plots
+python generate_plots.py
 ```
 
-Команды в чате:
-- `exit` — выход
-- `test` — запустить тестовые примеры
-- `temp 0.5` — изменить temperature
+## Data Format
 
-### Бенчмарк
-
-```bash
-python benchy.py
-```
-
-## Конфигурация обучения
-
-| Параметр | 14B (16-bit) | 8B (4-bit) |
-|----------|--------------|------------|
-| MAX_SEQ_LENGTH | 2048 | 2048 |
-| LORA_R | 16 | 16 |
-| LORA_ALPHA | 16 | 16 |
-| BATCH_SIZE | 1 | 2 |
-| GRAD_ACCUM | 8 | 4 |
-| LEARNING_RATE | 2e-4 | 2e-4 |
-| NUM_EPOCHS | 3 | 3 |
-
-## Формат данных
-
-JSONL с Alpaca форматом:
+JSONL with Alpaca format:
 
 ```json
 {
@@ -100,54 +96,6 @@ JSONL с Alpaca форматом:
 }
 ```
 
-## Обученные модели
-
-После обучения модели сохраняются в:
-- `outputs_14b_16bit/checkpoint-21303/` — чекпоинты
-- `finetuned_qwen3_14b_16bit/` — финальная модель
-- `lora_qwen3_14b_16bit/` — только LoRA адаптеры
-
-### Загрузка на HuggingFace
-
-```bash
-# Установка huggingface-cli
-pip install huggingface_hub
-
-# Логин
-huggingface-cli login
-
-# Загрузка LoRA адаптеров
-huggingface-cli upload YOUR_USERNAME/qwen3-14b-kz-law-lora ./lora_qwen3_14b_16bit
-```
-
-## Пример использования
-
-```python
-from unsloth import FastLanguageModel
-
-model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="outputs_14b_16bit/checkpoint-21303",
-    max_seq_length=2048,
-    load_in_4bit=True,
-)
-FastLanguageModel.for_inference(model)
-
-prompt = """Below is an instruction that describes a task, paired with an input that provides further context.
-
-### Instruction:
-Ответь на вопрос по казахстанскому законодательству.
-
-### Input:
-Какие права имеют работники при увольнении?
-
-### Response:
-"""
-
-inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
-outputs = model.generate(**inputs, max_new_tokens=512)
-print(tokenizer.decode(outputs[0], skip_special_tokens=True))
-```
-
-## Лицензия
+## License
 
 MIT

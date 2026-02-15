@@ -1,8 +1,9 @@
 """
-Подробный бенчмарк для оценки качества обученной модели Qwen3-14B
+Бенчмарк для оценки качества обученной модели
 Сравнение с эталонными ответами из датасета
 """
 import json
+import re
 import time
 import torch
 import random
@@ -12,8 +13,9 @@ from typing import List, Dict, Tuple
 from collections import defaultdict
 
 from unsloth import FastLanguageModel
-from datasets import load_dataset
 from tqdm import tqdm
+
+from config import ALPACA_PROMPT, VAL_FILE
 
 # Метрики
 try:
@@ -21,47 +23,27 @@ try:
     ROUGE_AVAILABLE = True
 except ImportError:
     ROUGE_AVAILABLE = False
-    print("⚠️  rouge_score не установлен. Установи: pip install rouge-score")
+    print("rouge_score не установлен: pip install rouge-score")
 
 try:
     from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
     import nltk
     try:
         nltk.data.find('tokenizers/punkt')
-    except:
+    except LookupError:
         nltk.download('punkt', quiet=True)
     BLEU_AVAILABLE = True
 except ImportError:
     BLEU_AVAILABLE = False
-    print("⚠️  nltk не установлен. Установи: pip install nltk")
+    print("nltk не установлен: pip install nltk")
 
 # ============== КОНФИГУРАЦИЯ ==============
 
-# Путь к обученной модели
-MODEL_PATH = "finetuned_qwen3_8b"  # Обученная 8B модель
-
-# Датасет для тестирования
-VAL_FILE = "combined_data/validation.jsonl"
-
-# Количество примеров для теста (None = все)
-NUM_SAMPLES = 100  # Уменьшено для скорости, поставь None для полного теста
-
-# Параметры генерации
+MODEL_PATH = "lora_qwen3_8b"
+NUM_SAMPLES = 100
 MAX_NEW_TOKENS = 512
-TEMPERATURE = 0.1  # Низкая температура для детерминированных ответов
+TEMPERATURE = 0.1
 TOP_P = 0.9
-
-# Промпт шаблон (должен совпадать с обучением)
-ALPACA_PROMPT = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-
-### Instruction:
-{}
-
-### Input:
-{}
-
-### Response:
-{}"""
 
 # ============== МЕТРИКИ ==============
 
@@ -110,7 +92,7 @@ def calculate_bleu(pred: str, reference: str) -> float:
     smoothing = SmoothingFunction().method1
     try:
         score = sentence_bleu(ref_tokens, pred_tokens, smoothing_function=smoothing)
-    except:
+    except Exception:
         score = 0.0
     return score
 
@@ -131,7 +113,6 @@ def calculate_length_ratio(pred: str, reference: str) -> float:
 def calculate_contains_key_info(pred: str, reference: str) -> float:
     """Проверка наличия ключевой информации"""
     # Извлекаем числа, даты, ключевые термины из reference
-    import re
     
     # Числа
     ref_numbers = set(re.findall(r'\d+', reference))
@@ -426,7 +407,7 @@ def show_worst_examples(benchmark_results: Dict, num_examples: int = 5):
 
 def main():
     print("=" * 60)
-    print("🧪 БЕНЧМАРК МОДЕЛИ QWEN3-14B")
+    print("БЕНЧМАРК МОДЕЛИ")
     print("=" * 60)
     print(f"Модель: {MODEL_PATH}")
     print(f"Датасет: {VAL_FILE}")
