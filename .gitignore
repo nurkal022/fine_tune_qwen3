@@ -57,7 +57,10 @@ runs/
 
 # Generated artifacts
 benchmark_results_*.json
+benchmark_*.json
+baseline_*.json
 training_summary_*.json
+dataset_stats.json
 ds_config.json
 reports/
 reports.zip

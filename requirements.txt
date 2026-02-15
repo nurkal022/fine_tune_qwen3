@@ -25,3 +25,9 @@ einops
 
 # Tokenizers
 tiktoken
+
+# Evaluation metrics
+rouge-score
+nltk
+bert-score
+tqdm
