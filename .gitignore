@@ -65,6 +65,10 @@ ds_config.json
 reports/
 reports.zip
 
+# Experiment results & human eval (generated)
+results/
+human_eval/
+
 # Garbage files from pip
 =*
 

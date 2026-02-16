@@ -2,6 +2,16 @@
 
 Fine-tuning Qwen3 models (4B/8B/14B/32B) on ~57,000 examples of Kazakhstan legislation using LoRA + Unsloth.
 
+## Experiments
+
+| # | Experiment | Script | What it produces |
+|---|-----------|--------|-----------------|
+| 1 | Unified Benchmark | `benchmark.py` | BERTScore, ROUGE-L, Citation Acc, Hallucination Rate |
+| 2 | Scaling Analysis | `compare_results.py` | Base vs FT comparison table across 4B/8B/14B |
+| 3 | RAG Ablation | `rag_benchmark.py` | FT only vs FT+RAG (top-1/3/5) |
+| 4 | Domain/Language Breakdown | `benchmark.py` + `compare_results.py` | Per-domain and RU vs KZ analysis |
+| 5 | Human Evaluation | `prepare_human_eval.py` | Blind evaluation sheets for lawyers |
+
 ## Project Structure
 
 ```
@@ -12,8 +22,12 @@ train.py                  # Unified training (4B/8B/14B via Unsloth 4-bit)
 train_32b_native.py       # Qwen3-32B (4-bit QLoRA, native transformers)
 train_32b_deepspeed.py    # Qwen3-32B (bf16 DeepSpeed ZeRO-3, 2x GPU)
 
-benchmark.py              # Model evaluation (BERTScore, ROUGE, Citation Acc)
+benchmark.py              # Exp 1+4: Evaluation with domain/language breakdown
+compare_results.py        # Exp 2+4: Scaling tables, cross-model comparison
+rag_benchmark.py          # Exp 3: RAG ablation (FT vs FT+RAG)
+prepare_human_eval.py     # Exp 5: Blind evaluation sheets for lawyers
 analyze_dataset.py        # Dataset statistics for paper
+
 chat.py                   # Interactive chat with trained model
 inference.py              # Batch inference & test examples
 generate_plots.py         # Training loss & benchmark visualization
@@ -23,69 +37,43 @@ prepare_data.py           # Dataset preparation & merging
 setup_env.sh              # Environment setup for RTX 5090
 run_training.sh           # Training launcher
 combined_data/            # Training dataset (57K train / 6K val)
-finetune_dataset/         # Original dataset source
+results/                  # Benchmark result JSONs
+human_eval/               # Evaluation sheets for lawyers
 ```
 
-## Requirements
-
-- Python 3.10+
-- CUDA 12.0+
-- GPU: RTX 5090 (32GB) recommended
-
-## Setup
+## Quick Start
 
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install unsloth
+# Setup
+conda activate ai
 pip install -r requirements.txt
-```
 
-## Training
-
-```bash
-# Qwen3-4B (4-bit, ~8GB VRAM)
-python train.py --model 4b
-
-# Qwen3-8B (4-bit, ~16GB VRAM)
-python train.py --model 8b --epochs 3
-
-# Qwen3-14B (4-bit, ~24GB VRAM)
-python train.py --model 14b --epochs 3 --lr 1e-4
-
-# Qwen3-32B (native QLoRA, ~30GB VRAM)
-python train_32b_native.py
-
-# Qwen3-32B (DeepSpeed ZeRO-3, 2x GPU)
-deepspeed --num_gpus=2 train_32b_deepspeed.py
-```
-
-## Evaluation
-
-```bash
-# Benchmark fine-tuned model
-python benchmark.py --model lora_qwen3_8b --samples 100
-
-# Benchmark baseline (untuned model)
-python benchmark.py --baseline unsloth/Qwen3-8B-unsloth-bnb-4bit --samples 100
-
-# Dataset statistics
+# Dataset stats (Exp 4 data section)
 python analyze_dataset.py
 
-# Interactive chat
-python chat.py --model lora_qwen3_8b
-```
+# Train all sizes
+python train.py --model 4b --epochs 3
+python train.py --model 8b --epochs 3
+python train.py --model 14b --epochs 3
 
-## Data Format
+# Baseline benchmarks
+python benchmark.py --baseline unsloth/Qwen3-4B-unsloth-bnb-4bit --samples 100
+python benchmark.py --baseline unsloth/Qwen3-8B-unsloth-bnb-4bit --samples 100
+python benchmark.py --baseline unsloth/Qwen3-14B-unsloth-bnb-4bit --samples 100
 
-JSONL with Alpaca format:
+# Fine-tuned benchmarks
+python benchmark.py --model lora_qwen3_4b --samples 100
+python benchmark.py --model lora_qwen3_8b --samples 100
+python benchmark.py --model lora_qwen3_14b --samples 100
 
-```json
-{
-  "instruction": "Ответь на вопрос по казахстанскому законодательству.",
-  "input": "Можно ли заключить договор ГПХ с указанием цены работы за сутки?",
-  "output": "Согласно законодательству РК..."
-}
+# Compare all results (Exp 2 + 4)
+python compare_results.py results/ --markdown results/paper_tables.md
+
+# RAG ablation (Exp 3) — requires legal corpus
+python rag_benchmark.py --model lora_qwen3_8b --corpus legal_docs/ --top-k 1 3 5
+
+# Human eval sheets (Exp 5)
+python prepare_human_eval.py --from-results results/*.json --questions 50
 ```
 
 ## License
