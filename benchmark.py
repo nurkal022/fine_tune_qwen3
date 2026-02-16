@@ -19,12 +19,7 @@ from datetime import datetime
 from typing import List, Dict, Tuple, Set
 from collections import defaultdict
 
-from unsloth import FastLanguageModel
-from tqdm import tqdm
-
-from config import ALPACA_PROMPT, VAL_FILE
-
-# Optional metrics
+# Import metrics BEFORE unsloth (unsloth patches sys.modules and can break imports)
 try:
     from rouge_score import rouge_scorer
     ROUGE_AVAILABLE = True
@@ -50,6 +45,11 @@ try:
 except ImportError:
     BERTSCORE_AVAILABLE = False
     print("WARNING: bert-score not installed: pip install bert-score")
+
+from unsloth import FastLanguageModel
+from tqdm import tqdm
+
+from config import ALPACA_PROMPT, VAL_FILE
 
 
 # ============== LANGUAGE & DOMAIN CLASSIFICATION ==============
