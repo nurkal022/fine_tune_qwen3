@@ -36,10 +36,9 @@ def model_label(result: Dict) -> str:
     """Human-readable label for a result."""
     model = result['model']
     tag = "Base" if result.get('is_baseline') else "FT"
-    # Extract size from model name
-    for size in ['4b', '8b', '14b', '32b', '4B', '8B', '14B', '32B']:
-        if size.lower() in model.lower():
-            return f"Qwen3-{size.upper()} {tag}"
+    size = _extract_size(model)
+    if size:
+        return f"Qwen3-{size.upper()} {tag}"
     return f"{model} ({tag})"
 
 
@@ -109,9 +108,10 @@ def print_scaling_table(results: List[Dict]):
 
 def _extract_size(model_name: str) -> str:
     """Extract model size (4b, 8b, 14b) from model name."""
-    for size in ['4b', '8b', '14b', '32b']:
-        if size in model_name.lower():
-            return size
+    import re
+    m = re.search(r'(\d+)[bB]', model_name)
+    if m:
+        return m.group(1) + 'b'
     return model_name
 
 

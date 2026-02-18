@@ -1,0 +1,1745 @@
+{
+  "model": "unsloth/Qwen3-14B-unsloth-bnb-4bit",
+  "is_baseline": true,
+  "num_samples": 100,
+  "total_time": 1048.5615565776825,
+  "avg_metrics": {
+    "citation_accuracy": 0.69,
+    "hallucination_rate": 0.2,
+    "key_info": 0.6157142857142859,
+    "length_ratio": 0.11793769089336967,
+    "gen_time": 10.485615565776826
+  },
+  "by_domain": {
+    "administrative": {
+      "count": 3,
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.75,
+        "length_ratio": 0.15314343027424457,
+        "gen_time": 10.472519715627035
+      }
+    },
+    "business": {
+      "count": 3,
+      "metrics": {
+        "citation_accuracy": 0.3333333333333333,
+        "hallucination_rate": 0.3333333333333333,
+        "key_info": 0.5462962962962963,
+        "length_ratio": 0.27066666285618096,
+        "gen_time": 10.469595750172934
+      }
+    },
+    "civil": {
+      "count": 19,
+      "metrics": {
+        "citation_accuracy": 0.3157894736842105,
+        "hallucination_rate": 0.21052631578947367,
+        "key_info": 0.3480576441102757,
+        "length_ratio": 0.13633120739662608,
+        "gen_time": 10.63106390049583
+      }
+    },
+    "constitutional": {
+      "count": 3,
+      "metrics": {
+        "citation_accuracy": 0.6666666666666666,
+        "hallucination_rate": 0.0,
+        "key_info": 0.611111111111111,
+        "length_ratio": 0.12743078762017376,
+        "gen_time": 10.493983030319214
+      }
+    },
+    "criminal": {
+      "count": 7,
+      "metrics": {
+        "citation_accuracy": 0.8571428571428571,
+        "hallucination_rate": 0.42857142857142855,
+        "key_info": 0.7218253968253968,
+        "length_ratio": 0.23734672802198875,
+        "gen_time": 10.495976482118879
+      }
+    },
+    "family": {
+      "count": 1,
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.21323529411764708,
+        "gen_time": 10.677386045455933
+      }
+    },
+    "labor": {
+      "count": 14,
+      "metrics": {
+        "citation_accuracy": 0.21428571428571427,
+        "hallucination_rate": 0.5714285714285714,
+        "key_info": 0.27976190476190477,
+        "length_ratio": 0.09991358532393411,
+        "gen_time": 10.504379408700126
+      }
+    },
+    "land": {
+      "count": 4,
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.875,
+        "length_ratio": 0.016408379318215385,
+        "gen_time": 10.477652072906494
+      }
+    },
+    "other": {
+      "count": 31,
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.12903225806451613,
+        "key_info": 0.8225806451612904,
+        "length_ratio": 0.1077634080745252,
+        "gen_time": 10.541588221826862
+      }
+    },
+    "tax": {
+      "count": 15,
+      "metrics": {
+        "citation_accuracy": 0.8,
+        "hallucination_rate": 0.0,
+        "key_info": 0.7177777777777778,
+        "length_ratio": 0.058000116943965736,
+        "gen_time": 10.15684471130371
+      }
+    }
+  },
+  "by_language": {
+    "kz": {
+      "count": 23,
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.8956521739130435,
+        "length_ratio": 0.02878567409403856,
+        "gen_time": 10.54781581007916
+      }
+    },
+    "ru": {
+      "count": 77,
+      "metrics": {
+        "citation_accuracy": 0.5974025974025974,
+        "hallucination_rate": 0.2597402597402597,
+        "key_info": 0.5320964749536178,
+        "length_ratio": 0.14456751409316987,
+        "gen_time": 10.46703627202418
+      }
+    }
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "vram_gb": 31.3,
+    "peak_vram_gb": 13.3
+  },
+  "timestamp": "2026-02-18T10:39:46.854595",
+  "detailed_results": [
+    {
+      "id": 0,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Какие обязательные документы (кроме талона о регис...",
+      "reference": "Согласно статьи 138 Налогового Кодекса РК налоговой проверкой является проверка, осуществляемая налоговым органом, исполнения норм налогового законодательства Республики Казахстан, а также иного закон...",
+      "prediction": "Хорошо, мне нужно ответить на вопрос о том, какие обязательные документы, кроме талона о регистрации, должен иметь индивидуальный предприниматель (ИП) в Казахстане для прохождения налоговой проверки. ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.16666666666666666,
+        "length_ratio": 0.14666666666666667,
+        "gen_time": 11.477238178253174
+      }
+    },
+    {
+      "id": 1,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "ТОО планирует принять на работу гражданина Германи...",
+      "reference": "Начисление налогов иностранному гражданину Федеративной Республики Германии, не являющемуся резидентом Республики Казахстан осуществляется следующим образом:",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law regarding a foreign employee working remotely for a Kazakhstani company. The user wants to know if they need to withhold taxes like pension...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.5,
+        "length_ratio": 0.03759398496240601,
+        "gen_time": 10.453927040100098
+      }
+    },
+    {
+      "id": 2,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Почему установленные процедуры важны для поддержания доверия к налоговой системе?",
+      "input": "",
+      "reference": "Это поддерживает стабильность налоговой системы и снижает конфликтность.",
+      "prediction": "Ну, я думаю, что установленные процедуры важны для поддержания доверия к налоговой системе, потому что они обеспечивают прозрачность и предсказуемость. Когда люди знают, какие правила применяются и ка...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.02247191011235955,
+        "gen_time": 10.463105916976929
+      }
+    },
+    {
+      "id": 3,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "В связи с перенесённой болезнью, согласно заключен...",
+      "reference": "На основании п.1ст. 43 Трудового кодекса РК работодательобязан временно перевестиработника на другую не противопоказанную по состоянию здоровья работу по заключению ВКК.",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking if an employer can terminate an employee's contract if they need to reassign the employee to a non-physical labor posit...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.05185185185185186,
+        "gen_time": 10.459626913070679
+      }
+    },
+    {
+      "id": 4,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Комиссия мүшесі қандай құжаттарды зерттей алады және қандай көшірмелерді ала алады",
+      "input": "",
+      "reference": "Құжаттармен танысуға және куәландырылған көшірмелерін алуға құқылы",
+      "prediction": "Okay, I need to answer the question about what documents a commission member can examine and what copies they can obtain. Let me start by recalling the relevant laws or regulations. In many jurisdicti...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.023809523809523808,
+        "gen_time": 10.48661184310913
+      }
+    },
+    {
+      "id": 5,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Как правильно оформить отпуск по беременности и ро...",
+      "reference": "Отпуск по беременности и родам регулирует статья 99 Трудового Кодекса РК (далее – ТК РК):",
+      "prediction": "Okay, I need to answer the user's question about how to properly document maternity leave and childcare leave in Kazakhstan. Let me start by recalling the relevant laws. The main legislation here woul...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.03768844221105527,
+        "gen_time": 10.483850717544556
+      }
+    },
+    {
+      "id": 6,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Какие этапы включает процесс планирования местного бюджета?",
+      "input": "",
+      "reference": "Планирование местного бюджета начинается с анализа социально-экономического развития села, прогнозирования доходов и расходов.  Затем формируется проект бюджета,  включающий все статьи доходов и расхо...",
+      "prediction": "Okay, the user is asking about the stages involved in the process of planning a local budget. Let me start by recalling what I know about budget planning at the municipal level.\n\nFirst, I think the pr...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.25555555555555554,
+        "gen_time": 10.454862356185913
+      }
+    },
+    {
+      "id": 7,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Руководство компании приняло решение о сокращении ...",
+      "reference": "Трудовой Кодекс РК  не регламентирует причины, по которым может быть произведено сокращение штата или численности работниковНормативное постановление Верховного Суда Республики Казахстан от 6 октября ...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking whether it's legal for a company's management to decide to lay off all employees due to production needs, while the com...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.105,
+        "gen_time": 10.51837968826294
+      }
+    },
+    {
+      "id": 8,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Работник поменял фамилию (взяла фамилию матери) ка...",
+      "reference": "Согласно пп. 1 п. 1 ст. 28 Трудового кодекса РК, трудовой договор должен содержать фамилию, имя, отчество (если указано в документе, удостоверяющем личность) работника.",
+      "prediction": "Okay, the user is asking about how to properly update a worker's surname in the personnel records in Kazakhstan. Let me recall the relevant laws.\n\nFirst, I know that in Kazakhstan, changes to personal...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.75,
+        "length_ratio": 0.07476635514018691,
+        "gen_time": 10.465788841247559
+      }
+    },
+    {
+      "id": 9,
+      "language": "ru",
+      "domain": "land",
+      "instruction": "Что такое специальный земельный фонд?",
+      "input": "",
+      "reference": "Резервные земли, создаваемые из неиспользуемых или нарушенных участков.",
+      "prediction": "Okay, I need to explain what a special land fund is. Let me start by recalling what I know. From what I remember, a special land fund is a type of land reserve managed by the government for specific p...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.02185792349726776,
+        "gen_time": 10.462603330612183
+      }
+    },
+    {
+      "id": 10,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "ТОО работает на упрощенном режиме. Может ли директ...",
+      "reference": "Статьей 681 Налогового кодекса определено, что размер доходов налогоплательщика, применяющего специальный налоговый режим на основе патента или упрощенной декларации, определяется юридическим лицом - ...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani legislation regarding a company operating under the simplified tax regime. The user is asking if the director of a TOO (ТОО) can use the income (reve...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.10473815461346633,
+        "gen_time": 10.527591466903687
+      }
+    },
+    {
+      "id": 11,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Бақылау-касса машинасының деректеріне уақтылы өзгерістер енгізуге кім жауапты?",
+      "input": "",
+      "reference": "Салық төлеушінің өзі жауапты.",
+      "prediction": "A:\n\nБақылау-касса машинасының деректеріне уақтылы өзгерістер енгізуге жауапты адам - бұл кәсіпорның ақпараттық жүйесін басқаруға жауапты адам немесе ақпараттық жүйелер бөлімінің маманы. Бұл міндетті о...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.017937219730941704,
+        "gen_time": 10.469908475875854
+      }
+    },
+    {
+      "id": 12,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Что происходит, если другие участники не покупают долю?",
+      "input": "",
+      "reference": "Продавец может продать долю любому лицу.",
+      "prediction": "Okay, the user is asking what happens if other participants don't buy a share. Let me break this down.\n\nFirst, I need to understand the context. The original instruction was in Russian, so the user mi...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.017241379310344827,
+        "gen_time": 10.45309591293335
+      }
+    },
+    {
+      "id": 13,
+      "language": "ru",
+      "domain": "business",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Добрый день, у меня такой вопрос. Наша компания Кр...",
+      "reference": "Здравствуйте, Марат!В рамках процедуры судебного разбирательства кредитор вправе обратиться в суд с требованием о наложении ареста на имущество должника.При этом согласноЗакона Республики Казахстан «О...",
+      "prediction": "Okay, let's tackle this question. The user is asking whether a creditor in Kazakhstan can require the debtor, which is a Kazakhstani TOO (a type of company), to transfer its 100% share in a Uzbekistan...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.05555555555555555,
+        "length_ratio": 0.6118210862619808,
+        "gen_time": 10.473403692245483
+      }
+    },
+    {
+      "id": 14,
+      "language": "ru",
+      "domain": "business",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Как оформить закрытие представительства?",
+      "reference": "1. Согласно ст. 16-1 Закона «О государственной регистрации юридических лиц и учетной регистрации филиалов и представительств», филиал (представительство) подлежит снятию с учетной регистрации на основ...",
+      "prediction": "Okay, the user is asking about how to close a representative office in Kazakhstan. Let me recall the relevant laws and procedures.\n\nFirst, I need to mention the main legal document, which is the Law o...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5833333333333333,
+        "length_ratio": 0.1741741741741742,
+        "gen_time": 10.477653741836548
+      }
+    },
+    {
+      "id": 15,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Почему сведения публикуются одновременно в интернете и печати?",
+      "input": "",
+      "reference": "Чтобы охватить разные категории пользователей — онлайн и офлайн.",
+      "prediction": "Okay, the user is asking why information is published simultaneously in the internet and print media. Let me think about this.\n\nFirst, I need to consider the reasons behind simultaneous publication. M...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.029411764705882353,
+        "gen_time": 10.51998233795166
+      }
+    },
+    {
+      "id": 16,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Каким образом сделать акт взаимозачета/корректиров...",
+      "reference": "Гражданским Кодексом Республики Казахстан (далее – ГК РК) не предусмотрен такой вид договора - как о финансовой помощи, поэтому данный договор  будет являться займом.",
+      "prediction": "Okay, I need to answer how to create an act of mutual set-off or debt adjustment between a Kazakhstani TOO and three non-resident companies according to Kazakh law. Let me start by recalling what I kn...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.75,
+        "length_ratio": 0.06282722513089005,
+        "gen_time": 10.448950052261353
+      }
+    },
+    {
+      "id": 17,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Сдает ли ИП на СНР 200 форму  \"Декларация по ИПН и...",
+      "reference": "Вопрос:Сдает ли ИП на СНР 200 форму «Декларация по ИПН и СН\"?Ответ:",
+      "prediction": "Okay, let's tackle this question. The user is asking whether an individual entrepreneur (ИП) on the Simplified Tax System (СНР) needs to submit form 200 \"Declaration for IPN and SN\" in Kazakhstan. \n\nF...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.03680981595092024,
+        "gen_time": 10.470301628112793
+      }
+    },
+    {
+      "id": 18,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Кто является субъектом, наделенным полномочиями на подписание соглашения, упомянутого в постановлени...",
+      "input": "",
+      "reference": "Субъектом, наделенным полномочиями на подписание соглашения, является Министерство труда и социальной защиты населения Республики Казахстан.  Это обусловлено тем, что именно данное министерство отвеча...",
+      "prediction": "Okay, I need to figure out who the subject is that has the authority to sign the agreement mentioned in the decree. Let me start by understanding the question. The user is asking about the legal entit...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.2596685082872928,
+        "gen_time": 10.485541343688965
+      }
+    },
+    {
+      "id": 19,
+      "language": "kz",
+      "domain": "criminal",
+      "instruction": "Халықаралық деңгейдегі қандай тетіктер прокуратураға құқықтарды қорғауға қатысуға мүмкіндік береді?",
+      "input": "",
+      "reference": "Қылмыстық-құқықтық ынтымақтастық және мемлекеттің мүдделерін халықаралық ұйымдарда білдіру.",
+      "prediction": "Okay, the user is asking about international mechanisms that allow the prosecution to participate in protecting rights. Let me break this down.\n\nFirst, I need to recall international legal frameworks ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.021447721179624665,
+        "gen_time": 10.495563507080078
+      }
+    },
+    {
+      "id": 20,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Почему государственные земли имеют особый правовой режим?",
+      "input": "",
+      "reference": "Они охраняются законом и не могут свободно отчуждаться.",
+      "prediction": "Okay, I need to explain why state lands have a special legal regime. Let me start by recalling what I know about state lands. They are owned by the government, right? So their management is different ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.024539877300613498,
+        "gen_time": 10.454501390457153
+      }
+    },
+    {
+      "id": 21,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Может ли договор о субаренде быть безвозмездным?",
+      "input": "",
+      "reference": "Да, может быть безвозмездным.",
+      "prediction": "Okay, the user is asking if a sublease agreement can be interest-free, or without payment. Let me start by recalling what a sublease is. A sublease is when a tenant rents out part of their leased spac...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.00963855421686747,
+        "gen_time": 10.47063159942627
+      }
+    },
+    {
+      "id": 22,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "ТОО  с иностранными учредителями, в группе компани...",
+      "reference": "Материальная заинтересованность работников служит стимулом для увеличения эффективности производства и качества работ.В соответствии со ст. 107 Трудового кодекса Республики Казахстан (далее – ТК РК), ...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani legislation regarding a bonus payment for a company with foreign shareholders. The user is asking what can serve as a basis for issuing a payment ord...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.08095238095238094,
+        "gen_time": 10.455601453781128
+      }
+    },
+    {
+      "id": 23,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Du сегментінде заттай (айырбастау/натуроплат) кірістерді қалай есепке алуға болады?",
+      "input": "",
+      "reference": "Алынған күні заттай кірістің өлшем бірліктерін және оның ақшалай бағасын бекітіңіз.",
+      "prediction": "Okay, the user is asking how to account for revenue in the context of a segment, specifically distinguishing between revenue and natural resources. Let me break this down.\n\nFirst, I need to recall the...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.02702702702702703,
+        "gen_time": 10.463406801223755
+      }
+    },
+    {
+      "id": 24,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Как на практике определяется \"трудная жизненная ситуация\" и кто принимает решение о предоставлении с...",
+      "input": "",
+      "reference": "Определение \"трудной жизненной ситуации\" – сложный процесс, требующий оценки объективных обстоятельств, которые нарушают жизнедеятельность гражданина.  Уполномоченный орган, в данном случае отдел заня...",
+      "prediction": "Okay, I need to explain how \"трудная жизненная ситуация\" (difficult life situation) is determined in practice and who decides on social assistance. Let me start by recalling what I know about Russian ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.625,
+        "length_ratio": 0.1803713527851459,
+        "gen_time": 10.482744216918945
+      }
+    },
+    {
+      "id": 25,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Меншік құқығының ауысу сәті қалай белгіленеді?",
+      "input": "",
+      "reference": "Тізілімде мемлекеттік тіркеу арқылы.",
+      "prediction": "Okay, the user is asking about how the moment of transfer of property rights is determined. Let me start by recalling the relevant legal principles. In civil law systems, the transfer of property righ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.011940298507462687,
+        "gen_time": 10.484912633895874
+      }
+    },
+    {
+      "id": 26,
+      "language": "ru",
+      "domain": "criminal",
+      "instruction": "Как регулируется ответственность за нецелевое использование бюджетных средств в рамках казахстанског...",
+      "input": "",
+      "reference": "Нецелевое использование бюджетных средств – это серьезное правонарушение, которое влечет за собой юридическую ответственность.  Казахстанское законодательство предусматривает различные виды ответствен...",
+      "prediction": "Okay, I need to answer the question about how responsibility for the misuse of budget funds is regulated under Kazakhstani legislation and what legal consequences may arise. Let me start by recalling ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.8,
+        "length_ratio": 0.32781456953642385,
+        "gen_time": 10.495615243911743
+      }
+    },
+    {
+      "id": 27,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Здравствуйте! После 9 класса поступила на грант, с...",
+      "reference": "Здравствуйте, Аляска!В данном случае имеет значение почему вы не сдали предмет. ВПриказа Министра образования и науки Республики Казахстан от 18 марта 2008 года № 125 Об утверждении Типовых правил про...",
+      "prediction": "Okay, let's see. The user is a 16-year-old student in Kazakhstan who is on a grant after finishing 9th grade. She's in her second year of university but failed a subject, and now she's facing possible...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.16666666666666666,
+        "length_ratio": 0.4668508287292818,
+        "gen_time": 10.522844314575195
+      }
+    },
+    {
+      "id": 28,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "В случае заключения договора поставки, к примеру н...",
+      "reference": "Гражданский кодекс Республики Казахстан (Особенная часть) от 1 июля 1999 года предусматривает:В статье 458: по договору поставки продавец (поставщик), являющийся предпринимателем, обязуется передать в...",
+      "prediction": "Okay, the user is asking about the required documents for a supplier when concluding a supply contract in Kazakhstan, specifically for goods like pipes, metal, concrete, and screws. Let me recall the ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.3333333333333333,
+        "length_ratio": 0.18661971830985916,
+        "gen_time": 10.498524904251099
+      }
+    },
+    {
+      "id": 29,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Юридическое лицо (с одним учредителем) хочет оказа...",
+      "reference": "Для того, чтобы рассматривать материальную помощь, как  социальную поддержку физического лица, необходимо, чтобы она соответствовала  понятию, приведенным в пп. 38) п.1 ст.1 Налогового кодекса РК (бла...",
+      "prediction": "В данном случае, если юридическое лицо (с одним учредителем) хочет оказать материальную помощь студентам из малообеспеченных семей и оставшихся без попечения родителей определенного ВУЗа, можно заключ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.17479674796747965,
+        "gen_time": 10.463663578033447
+      }
+    },
+    {
+      "id": 30,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Когда вступают в силу Правила выдворения иностранцев и лиц без гражданства из Республики Казахстан, ...",
+      "input": "",
+      "reference": "Правила вступают в силу через десять календарных дней после их первого официального опубликования.  Это стандартная процедура вступления в силу нормативных правовых актов в Казахстане, обеспечивающая ...",
+      "prediction": "Okay, I need to find out when the \"Rules for the Expulsion of Foreigners and Stateless Persons from the Republic of Kazakhstan\" came into effect. The user mentioned they were approved by a government ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.625,
+        "length_ratio": 0.39622641509433965,
+        "gen_time": 8.555335283279419
+      }
+    },
+    {
+      "id": 31,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Какие производственные объекты и рабочие места не ...",
+      "reference": "В соответствии с п.3 ст.183 Трудового Кодекса РК Порядок проведения обязательной периодической аттестации производственных объектов по условиям труда определяется уполномоченным государственным органо...",
+      "prediction": "Хорошо, мне нужно ответить на вопрос о том, какие производственные объекты и рабочие места в Казахстане не подлежат аттестации по условиям труда. Начну с того, что вспомню основные законы и нормативны...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.16666666666666666,
+        "length_ratio": 0.10762331838565023,
+        "gen_time": 10.471086740493774
+      }
+    },
+    {
+      "id": 32,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Какие механизмы правового регулирования используются для определения и поддержки целевых групп насел...",
+      "input": "",
+      "reference": "Правовое регулирование поддержки целевых групп осуществляется через  законодательные акты,  устанавливающие критерии отнесения к определённым категориям (например,  малообеспеченные, инвалиды), и  опр...",
+      "prediction": "Okay, I need to answer the question about the mechanisms of legal regulation used to determine and support target population groups and their effectiveness. Let me start by recalling what I know about...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.22014051522248243,
+        "gen_time": 10.497676134109497
+      }
+    },
+    {
+      "id": 33,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Необходимо ли в трудовом договоре указывать размер...",
+      "reference": "Содержание трудового договора определяет статья 28 Трудового Кодекса РК (далее по тексту – ТК РК), где в подпункте 7) пункта 1 указано, что трудовой договор должен содержать: размер и иные условия опл...",
+      "prediction": "Okay, I need to answer whether the labor contract in Kazakhstan must include the salary, which consists of a fixed and variable part. Let me recall the relevant laws.\n\nFirst, I remember that the Labor...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.5,
+        "length_ratio": 0.09565217391304347,
+        "gen_time": 10.490682363510132
+      }
+    },
+    {
+      "id": 34,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Здравствуйте. Мы купили машину. Оказалось, что дви...",
+      "reference": "Здравствуйте, Леонид!СогласноЗакона РК \"О защите прав потребителей\" потребитель, которому продан товар ненадлежащего качества, если его недостатки не были оговорены продавцом, вправе по своему выбору ...",
+      "prediction": "Okay, let's try to figure out how to answer this question about Kazakhstani law. The user bought a car, found out the engine was defective, and the dealership agreed to an exchange. But then someone k...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.3227990970654627,
+        "gen_time": 10.48286747932434
+      }
+    },
+    {
+      "id": 35,
+      "language": "ru",
+      "domain": "criminal",
+      "instruction": "Какие последствия могут быть за неправомерное содержание военнослужащего в помещении для временно за...",
+      "input": "",
+      "reference": "Неправомерное содержание – например, без составления протокола или при наличии возможности доставки на гауптвахту – влечет за собой ответственность для должностных лиц.  Это может выражаться в дисципл...",
+      "prediction": "Неправомерное содержание военнослужащего в помещении для временно задержанных может повлечь за собой следующие последствия:\n\n1. **Административная ответственность**:\n   - Согласно статье 12.12 Кодекса...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.6666666666666666,
+        "length_ratio": 0.29533678756476683,
+        "gen_time": 10.49565052986145
+      }
+    },
+    {
+      "id": 36,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Когда можно отменить регистрацию кандидата?",
+      "input": "",
+      "reference": "Регистрация отменяется при выявлении ложных данных о доходах и имуществе.",
+      "prediction": "Okay, the user is asking when it's possible to cancel a candidate's registration. Let me think about the typical scenarios where this might happen.\n\nFirst, I need to consider the context. Registration...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.02304147465437788,
+        "gen_time": 10.696187257766724
+      }
+    },
+    {
+      "id": 37,
+      "language": "ru",
+      "domain": "criminal",
+      "instruction": "Какие ограничения могут быть наложены на предоставление правовой помощи по уголовным делам в Казахст...",
+      "input": "",
+      "reference": "Предоставление правовой помощи может быть ограничено, если запрос противоречит законодательству Казахстана, затрагивает государственную безопасность или суверенитет страны, или нарушает права и свобод...",
+      "prediction": "Okay, I need to figure out the limitations on providing legal assistance in criminal cases in Kazakhstan. Let me start by recalling what I know about Kazakhstan's legal system. It's a civil law countr...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.21266968325791857,
+        "gen_time": 10.494660139083862
+      }
+    },
+    {
+      "id": 38,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Почему срок обжалования различается для партийных списков и кандидатов Ассамблеи?",
+      "input": "",
+      "reference": "Разный срок отражает особенности и масштабы процедур для партий и Ассамблеи.",
+      "prediction": "Okay, the user is asking why the appeal period differs between party lists and candidates for the Assembly. Let me start by recalling the legal framework in Russia regarding elections.\n\nFirst, I know ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.028497409326424868,
+        "gen_time": 10.516461610794067
+      }
+    },
+    {
+      "id": 39,
+      "language": "ru",
+      "domain": "land",
+      "instruction": "Когда выдел земельной доли невозможен?",
+      "input": "",
+      "reference": "Когда это запрещено законом или вредит участку.",
+      "prediction": "Okay, I need to figure out when the division of a land share is impossible. Let me start by recalling what a land share (земельная доля) is. It's a portion of a land plot that a person owns, right? So...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.016666666666666666,
+        "gen_time": 10.483213901519775
+      }
+    },
+    {
+      "id": 40,
+      "language": "ru",
+      "domain": "criminal",
+      "instruction": "Какие потенциальные правовые последствия могли бы возникнуть при ненадлежащем выполнении обязанносте...",
+      "input": "",
+      "reference": "Ненадлежащее выполнение обязанностей государственными органами могло бы привести к различным правовым последствиям,  включая дисциплинарную, административную или даже уголовную ответственность должнос...",
+      "prediction": "Okay, I need to figure out the potential legal consequences of improper performance of duties by government agencies involved in organizing a visit. Let me start by breaking down the question. The use...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.8,
+        "length_ratio": 0.20531400966183577,
+        "gen_time": 10.528193473815918
+      }
+    },
+    {
+      "id": 41,
+      "language": "ru",
+      "domain": "constitutional",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Как делить приказы на личный состав и на основную ...",
+      "reference": "В соответствии с п. 46 Правил документирования, управления документацией и использования систем электронного документооборота в государственных и негосударственных организациях, утвержденных постановл...",
+      "prediction": "Okay, I need to answer the question about how to divide orders (приказы) into personnel and main activities according to Kazakhstani legislation. Let me start by recalling what I know about Kazakhstan...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.07311320754716981,
+        "gen_time": 10.502438306808472
+      }
+    },
+    {
+      "id": 42,
+      "language": "kz",
+      "domain": "land",
+      "instruction": "Уақытша өтеусіз жер пайдалану кезінде қандай акт беріледі?",
+      "input": "",
+      "reference": "Уақытша өтеусіз жер пайдалану құқығына Акт.",
+      "prediction": "Okay, the user is asking about what document is issued when using land temporarily without a permanent transfer. Let me break this down.\n\nFirst, I need to recall the legal framework related to land us...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.018018018018018018,
+        "gen_time": 10.489015579223633
+      }
+    },
+    {
+      "id": 43,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Неліктен төлем көзінен ұстап қалу есебіне ЖТС бойынша асып кетуді есептеуге болмайды?",
+      "input": "",
+      "reference": "Көзден ұстап қалуды салық органы емес, жұмыс беруші жүзеге асырады.",
+      "prediction": "Okay, let's tackle this question. The user is asking why it's not possible to account for the excess of the payment source in the calculation of the tax on income of physical persons (ЖТС). \n\nFirst, I...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.02512562814070352,
+        "gen_time": 10.493147134780884
+      }
+    },
+    {
+      "id": 44,
+      "language": "ru",
+      "domain": "family",
+      "instruction": "Ответь на юридический вопрос по законодательству Казахстана.",
+      "input": "Можно ли требовать алименты, если ребенок проживае...",
+      "reference": "Согласно казахстанскому законодательству, обязанность по содержанию ребенка лежит на обоих родителях вне зависимости от того, с кем ребенок проживает. Если ребенок фактически живет с отцом, мать может...",
+      "prediction": "Okay, I need to answer a legal question about alimony in Kazakhstan. The user is asking if she has to pay alimony if her child lives with the father after a divorce, especially since she can't afford ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.21323529411764708,
+        "gen_time": 10.677386045455933
+      }
+    },
+    {
+      "id": 45,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Какие вопросы охватывает этот контроль?",
+      "input": "",
+      "reference": "Он охватывает правильность исчисления и уплаты налогов.",
+      "prediction": "Okay, the user is asking, \"What questions does this control cover?\" but there's no input provided. Hmm, maybe the input was supposed to be a specific control or regulation, but it's missing here. With...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.05263157894736842,
+        "gen_time": 4.308703422546387
+      }
+    },
+    {
+      "id": 46,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Қандай әскери құрылымдар қадағалауға жатады?",
+      "input": "",
+      "reference": "Қазақстан Республикасының Қарулы Күштері, басқа әскерлері мен әскери құрамалары.",
+      "prediction": "Okay, the user is asking which military structures are under surveillance. Let me break this down.\n\nFirst, I need to understand the context. The question is in Kazakh, so I should make sure I'm interp...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.023255813953488372,
+        "gen_time": 10.464991807937622
+      }
+    },
+    {
+      "id": 47,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Почему налогоплательщика, подавшего заявление о ликвидации, включают в открытый список?",
+      "input": "",
+      "reference": "Чтобы обеспечить открытость ликвидации и информирование всех заинтересованных лиц.",
+      "prediction": "Налогоплательщика, подавшего заявление о ликвидации, включают в открытый список, потому что он находится в процессе ликвидации, и информация о таком налогоплательщике может быть интересна потенциальны...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.023809523809523808,
+        "gen_time": 10.491215705871582
+      }
+    },
+    {
+      "id": 48,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Нужно ли составлять новый трудовой договор в связи...",
+      "reference": "Если речь идет о переводе в другое обособленное структурное подразделение у одного юридического лица, то оформление изменений осуществляется путем подписания  дополнительного соглашения к трудовому до...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking whether a new employment contract needs to be signed when transferring employees from a regional branch to a city-based...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.08254716981132076,
+        "gen_time": 10.470980644226074
+      }
+    },
+    {
+      "id": 49,
+      "language": "kz",
+      "domain": "land",
+      "instruction": "Жергілікті өзін-өзі басқарудың басқа органдарының мүшелерін сайлауды кім тағайындайды және ұйымдасты...",
+      "input": "",
+      "reference": "Аумақтық сайлау комиссиясы",
+      "prediction": "Okay, I need to figure out who is responsible for organizing and appointing the election of members for the organs of local self-government. Let me start by recalling what I know about local self-gove...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.00909090909090909,
+        "gen_time": 10.475775480270386
+      }
+    },
+    {
+      "id": 50,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Салық есебінен алу туралы мәліметтер қайда орналастырылады?",
+      "input": "",
+      "reference": "Уәкілетті органның ресми интернет-ресурсында.",
+      "prediction": "Okay, the user is asking where information about tax deductions is stored. Let me think about the context. In many countries, tax information is managed by government agencies. For example, in the US,...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.019230769230769232,
+        "gen_time": 10.475711345672607
+      }
+    },
+    {
+      "id": 51,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Каковы сроки перерегистрации ТОО, в связи со смено...",
+      "reference": "Согласно статье 42 Гражданского Кодекса юридическое лицо подлежит перерегистрации в случаях:уменьшения размера уставного капитала;изменения наименования;",
+      "prediction": "Okay, I need to answer the question about the deadlines for re-registering a TOO (Toimish Tashkiloti, which is a limited liability company in Kazakhstan) when there's a change in participants. Let me ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.25,
+        "length_ratio": 0.0436046511627907,
+        "gen_time": 10.436574459075928
+      }
+    },
+    {
+      "id": 52,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Өкімдердің электрондық бағыты шаралардың орындалу жылдамдығы мен дәлдігіне қалай әсер етеді?",
+      "input": "",
+      "reference": "Электрондық форма жеделдікті қамтамасыз етеді, адам факторын азайтады және ашықтықты арттырады.",
+      "prediction": "Okay, I need to figure out how electronic governance (e-governance) affects the speed and accuracy of implementing measures. Let me start by understanding what e-governance entails. It involves using ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.036544850498338874,
+        "gen_time": 10.474250555038452
+      }
+    },
+    {
+      "id": 53,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Какое значение имеет решение суда о недостаточности имущества для налогового органа при списании зад...",
+      "input": "",
+      "reference": "Решение суда подтверждает факт недостаточности имущества и является основанием для списания долга.",
+      "prediction": "Недостаточность имущества — это ситуация, когда у налогоплательщика отсутствует имущество, которое может быть реализовано для погашения задолженности. Решение суда о недостаточности имущества имеет ва...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.03680981595092024,
+        "gen_time": 10.473931074142456
+      }
+    },
+    {
+      "id": 54,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Как происходит согласование проекта местного бюджета с вышестоящими органами?",
+      "input": "",
+      "reference": "Процедура согласования проекта местного бюджета с вышестоящими органами  регламентируется бюджетным законодательством Казахстана.  Проект направляется в уполномоченный орган (например, областной акима...",
+      "prediction": "Нужно написать подробный ответ на вопрос \"Как происходит согласование проекта местного бюджета с вышестоящими органами?\".\n\nВ ответе нужно описать процесс согласования проекта бюджета, включая этапы, у...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.8333333333333333,
+        "length_ratio": 0.3472803347280335,
+        "gen_time": 10.43603801727295
+      }
+    },
+    {
+      "id": 55,
+      "language": "ru",
+      "domain": "criminal",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Здравствуйте! Я работаю в коммунальном государстве...",
+      "reference": "Здравствуйте Меруерт!1) Если на момент вынесения судом приговора в отношении работницы, действовал Уголовный кодекс РК от 16 июля 1997 года, судимость по части 2 статьи 129 УК РК не препятствует заклю...",
+      "prediction": "Okay, let's tackle this question. The user is asking whether a woman with a criminal record can work as an economist in a state-owned communal institution in Kazakhstan. The specific charge is under A...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.4111111111111111,
+        "length_ratio": 0.22335025380710657,
+        "gen_time": 10.480923175811768
+      }
+    },
+    {
+      "id": 56,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Система оплаты труда в соответствии с действующим ...",
+      "reference": "Система оплаты труда в соответствии с действующим законодательством должна обеспечивать долю основной заработной платы не менее 75% в заработной плате Работников без учета единовременных стимулирующих...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking if there's a maximum limit on stimulating payments, given that the base salary should be at least 75% of the total sala...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.5,
+        "length_ratio": 0.09041095890410959,
+        "gen_time": 10.477218389511108
+      }
+    },
+    {
+      "id": 57,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Можно ли перевести беременную работницу на работу ...",
+      "reference": "В статье 44 Трудового Кодекса РК от 23.11.2015 г. за № 414-V (с изменениями и дополнениями по состоянию на 01.01.2019 г.) (далее по тексту – ТК РК)  указано следующее:",
+      "prediction": "Okay, I need to answer whether an employer in Kazakhstan can transfer a pregnant employee to a job with a lower salary. Let me start by recalling the relevant labor laws in Kazakhstan.\n\nFirst, I remem...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.5,
+        "length_ratio": 0.08100558659217877,
+        "gen_time": 10.479307651519775
+      }
+    },
+    {
+      "id": 58,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Работник написал заявление об увольнении по собств...",
+      "reference": "В соответствии со статьей 50 Трудового Кодекса Республики Казахстан от 23 ноября 2015 года № 414-V (далее – ТК РК), Трудовой договор может быть расторгнут по соглашению сторон. Дата расторжения трудов...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking whether an employer can terminate an employee's contract on August 15, 2025, even though the employee is on sick leave ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.25,
+        "length_ratio": 0.10294117647058824,
+        "gen_time": 10.462596893310547
+      }
+    },
+    {
+      "id": 59,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Какие географические ограничения действуют на предоставление социальной помощи, описанной в тексте?",
+      "input": "",
+      "reference": "Социальная помощь, описанная в тексте, распространяется только на лиц, зарегистрированных на территории Уланского района Восточно-Казахстанской области.  Это территориальное ограничение обусловлено те...",
+      "prediction": "Okay, I need to figure out the geographical limitations for the social assistance described in the text. But wait, the user didn't provide the actual text they're referring to. The input is empty. Hmm...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.26595744680851063,
+        "gen_time": 10.443907737731934
+      }
+    },
+    {
+      "id": 60,
+      "language": "ru",
+      "domain": "criminal",
+      "instruction": "Как обеспечивается право на защиту в уголовном процессе, и какие гарантии  предусмотрены для подозре...",
+      "input": "",
+      "reference": "Право на защиту – фундаментальный принцип уголовного процесса, гарантирующий обвиняемому (подозреваемому) возможность отстаивать свои права и законные интересы всеми не запрещенными законом способами....",
+      "prediction": "Нормы уголовно-процессуального законодательства РФ гарантируют право на защиту в уголовном процессе. В соответствии с ч. 1 ст. 51 Конституции РФ каждый имеет право на защиту в суде, а также на защиту ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.875,
+        "length_ratio": 0.37549407114624506,
+        "gen_time": 10.481229305267334
+      }
+    },
+    {
+      "id": 61,
+      "language": "ru",
+      "domain": "administrative",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Какой порядок и какие документы необходимы для офо...",
+      "reference": "Для получение для поездки в ФРГ для прохождения языковых курсов,  необходимо будет подать в Генеральное консульство Федеративной Республики Германия в г. Алматы, в административный округ которого вход...",
+      "prediction": "Okay, the user is asking about the process and required documents for a long-term visa to Germany for language courses under Kazakhstani law. Let me start by recalling the general requirements for a G...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.75,
+        "length_ratio": 0.15789473684210528,
+        "gen_time": 10.490230560302734
+      }
+    },
+    {
+      "id": 62,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Су қорғау аймақтары мен белдеулерін белгілеудің мақсаты қандай?",
+      "input": "",
+      "reference": "Судың және табиғи экожүйелердің тазалығын сақтау.",
+      "prediction": "Okay, I need to figure out the purpose of marking protected areas and zones for water conservation. Let me start by recalling what I know about water protection zones. These areas are usually designat...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.016304347826086956,
+        "gen_time": 10.456186056137085
+      }
+    },
+    {
+      "id": 63,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Заказчик произвел перерегистрацию ТОО (изменил наи...",
+      "reference": "В соответствии с пп.2 п.6 ст.42 Гражданского кодекса РК (далее – ГК РК): «Юридическое лицо подлежит перерегистрации в случае изменения наименования».",
+      "prediction": "Okay, let's tackle this question. The user is asking about Kazakhstani legislation regarding a client (Заказчик) who re-registered their LLP (ТОО), changing the name and director, but isn't providing ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.25,
+        "length_ratio": 0.055408970976253295,
+        "gen_time": 10.47493839263916
+      }
+    },
+    {
+      "id": 64,
+      "language": "ru",
+      "domain": "business",
+      "instruction": "Применяется ли косвенный метод к предпринимателям и лицам частной практики?",
+      "input": "",
+      "reference": "Нет, он не применяется к лицам, ведущим предпринимательскую или частную практику.",
+      "prediction": "Okay, I need to figure out whether the indirect method applies to self-employed individuals and those in private practice. Let me start by recalling what the indirect method refers to. From what I rem...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.026004728132387706,
+        "gen_time": 10.457729816436768
+      }
+    },
+    {
+      "id": 65,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Штатная численность ТОО в сфере информационных тех...",
+      "reference": "В пункте 1 статьи 202 Трудового Кодекса РК от 23.11.2015 г. за № 414-V (с изменениями и дополнениями по состоянию на 01.01.2019 г.) (далее по тексту – ТК РК).",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking whether a company in the IT sector with a staff of 70 people (but currently only 48) needs to have a safety and labor p...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.0,
+        "length_ratio": 0.07493540051679587,
+        "gen_time": 10.511451005935669
+      }
+    },
+    {
+      "id": 66,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Кәмелетке толмаған Мұрагер салық жауапкершілігінен босатылуы мүмкін бе?",
+      "input": "",
+      "reference": "Иә, сот шешімі бойынша.",
+      "prediction": "Okay, the user is asking if a minor can be exempt from inheritance tax. Let me start by recalling the legal framework around inheritance tax and minors.\n\nFirst, I need to check if the country in quest...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.009216589861751152,
+        "gen_time": 10.714147806167603
+      }
+    },
+    {
+      "id": 67,
+      "language": "ru",
+      "domain": "constitutional",
+      "instruction": "Как принцип разделения властей проявляется в процессе бюджетного планирования и распределения средст...",
+      "input": "",
+      "reference": "Принцип разделения властей, закрепленный в Конституции Казахстана, предполагает разделение функций между законодательной, исполнительной и судебной ветвями власти.  В бюджетном процессе законодательна...",
+      "prediction": "Okay, I need to explain how the separation of powers is manifested in the budget planning and distribution process in Kazakhstan. Let me start by recalling what the separation of powers entails. It's ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.8333333333333333,
+        "length_ratio": 0.2779291553133515,
+        "gen_time": 10.474920511245728
+      }
+    },
+    {
+      "id": 68,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Может ли физическое лицо заключить трудовой догово...",
+      "reference": "Согласно пп.36) п.1 ст.1 Трудового Кодекса РК (далее по тексту – Кодекс) трудовой договор - письменное соглашение между работником и работодателем, в соответствии с которым работник обязуется лично вы...",
+      "prediction": "Okay, I need to answer whether a physical person can enter into an employment contract with a labor migrant in Kazakhstan. Let me start by recalling the basics of Kazakhstani labor law.\n\nFirst, labor ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.75,
+        "length_ratio": 0.10543130990415336,
+        "gen_time": 10.483667135238647
+      }
+    },
+    {
+      "id": 69,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Мақсатты мақсаттың өзгеруі сайттың экономикалық бағалауына қалай әсер етеді?",
+      "input": "",
+      "reference": "Ол кадастрлық құнын жоғарылатуы немесе төмендетуі мүмкін.",
+      "prediction": "Okay, the user is asking how the change in the purpose of a website affects its economic evaluation. Let me break this down.\n\nFirst, I need to understand what \"purpose\" means here. The website's prima...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.01891891891891892,
+        "gen_time": 10.473448276519775
+      }
+    },
+    {
+      "id": 70,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Если РВП истекает 30.10.2023. нужно заранее подать...",
+      "reference": "Разрешение на временное проживание (РВП) — это документ, который выдается иностранцам или лицам без гражданства, временно пребывающим в Казахстане. Для иностранцев из стран ЕАЭС и СНГ он заменяет собо...",
+      "prediction": "Okay, the user is asking about the process for extending a Russian temporary residence permit (RVP) in Kazakhstan. The RVP expires on October 30, 2023. They want to know if they need to apply before o...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.75,
+        "length_ratio": 0.1320754716981132,
+        "gen_time": 10.45040225982666
+      }
+    },
+    {
+      "id": 71,
+      "language": "kz",
+      "domain": "administrative",
+      "instruction": "Сот жүйесінің бюджеттік бағдарламасының әкімшісінің ағымдағы әкімшілік шығыстар лимиті қалай реттеле...",
+      "input": "",
+      "reference": "Ағымдағы әкімшілік шығыстар лимиті белгіленбейді.",
+      "prediction": "Okay, the user is asking about how the current administrative expense limit for the budget program of the State System is regulated. Let me break this down.\n\nFirst, I need to recall the relevant laws ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.0196078431372549,
+        "gen_time": 10.460174798965454
+      }
+    },
+    {
+      "id": 72,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Здравствуйте. Я хотела спросить по поводу налогооб...",
+      "reference": "Здравствуйте Рауан!СогласноКодекса Республики Казахстан «О налогах и обязательных платежах в бюджет» от 25 декабря 2017 года из доходов физического лица, подлежащих налогообложению, исключаются госуда...",
+      "prediction": "Okay, the user is asking about taxation in Kazakhstan regarding various types of allowances and assistance given to young doctors. Let me break down each part of their question.\n\nFirst, they mentioned...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.1,
+        "length_ratio": 0.2296918767507003,
+        "gen_time": 10.497509241104126
+      }
+    },
+    {
+      "id": 73,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Может ли гражданин Китая, не имеющий вид на житель...",
+      "reference": "Казахстан является участником Конвенции о дорожном движении от 08.11.1968 года (город Вена). В соответствии со статьей 41 указанной Конвенции, страны-участницы признают на своей территории любые нацио...",
+      "prediction": "Нет, гражданин Китая, не имеющий визы на жительство в Республике Казахстан, не может управлять автомобилем на территории Казахстана на основании китайских водительских прав. Для управления транспортны...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.14166666666666666,
+        "gen_time": 10.499452114105225
+      }
+    },
+    {
+      "id": 74,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Должен ли быть в штате дошкольного образовательног...",
+      "reference": "Безопасность и охрана труда регламентируется Трудовым Кодексом РК (далее по тексту – Кодекс). Согласно п.2 ст.182 Кодекса, работодатель обязан:",
+      "prediction": "Okay, I need to answer whether a preschool educational institution in Kazakhstan must have a safety specialist or inspector. Let me start by recalling the relevant laws.\n\nFirst, the Law of the Republi...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.0,
+        "length_ratio": 0.055232558139534885,
+        "gen_time": 10.461068868637085
+      }
+    },
+    {
+      "id": 75,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Прокурордың талаптары мен сұраулары жекеменшік ұйымдар үшін орындалуға міндетті ме?",
+      "input": "",
+      "reference": "Иә, меншік нысанына қарамастан.",
+      "prediction": "Okay, I need to answer the question: Are the prosecutor's demands and questions mandatory for private companies? Let me start by understanding the legal framework in Kazakhstan.\n\nFirst, I recall that ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.009195402298850575,
+        "gen_time": 10.46348261833191
+      }
+    },
+    {
+      "id": 76,
+      "language": "ru",
+      "domain": "administrative",
+      "instruction": "Каким образом Закон Республики Казахстан \"Об автомобильных дорогах\" определяет классификацию автомоб...",
+      "input": "",
+      "reference": "Закон \"Об автомобильных дорогах\" устанавливает критерии классификации, основываясь на административно-территориальном делении и функциональном назначении.  Дороги областного значения, согласно закону,...",
+      "prediction": "Okay, I need to figure out how the Law of the Republic of Kazakhstan \"On Automobile Roads\" classifies roads of regional and district significance. Let me start by recalling what I know about Kazakhsta...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.2819277108433735,
+        "gen_time": 10.467153787612915
+      }
+    },
+    {
+      "id": 77,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Работник работает во вредных условиях труда по вах...",
+      "reference": "Согласно пп.1 п.1 ст.89 Трудового кодекса РК дополнительные оплачиваемые ежегодные трудовые отпуска предоставляются работникам, занятым на тяжелых работах, работах с вредными и (или) опасными условиям...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani labor law. The user is asking whether the inter-vacation rest period (межвахтовый отдых) is counted when calculating the vacation time for hazardous ...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.25,
+        "length_ratio": 0.15988372093023254,
+        "gen_time": 10.454345941543579
+      }
+    },
+    {
+      "id": 78,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Меншік құқығын қайта ресімдеу немесе иеліктен шығарунені білдіреді?",
+      "input": "",
+      "reference": "Қайта ресімдеу-бұл меншік иесінің өзгеруі, иеліктен шығару — сайтты басқа адамға беру.",
+      "prediction": "Okay, I need to figure out what the user is asking here. The question is in Kazakh, and it's about property rights. Let me break it down.\n\nThe user is asking: \"What does the re-registration or removal...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.02877697841726619,
+        "gen_time": 10.464617729187012
+      }
+    },
+    {
+      "id": 79,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "В случае если доп. соглашение о продлении ТД не за...",
+      "reference": "Нормативное постановление Верховного Суда Республики Казахстан от 6 октября 2017 года № 9 \"О некоторых вопросах применения судами законодательства при разрешении трудовых споров\" устанавливает, что в ...",
+      "prediction": "Направлено на ответ на вопрос по казахстанскому законодательству. В случае если дополнительное соглашение о продлении трудового договора не заключено, трудовой договор считается продлённым на срок, ко...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.375,
+        "length_ratio": 0.21657754010695188,
+        "gen_time": 10.480384349822998
+      }
+    },
+    {
+      "id": 80,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Как начислить отпускные сменным работникам, у кото...",
+      "reference": "Согласно статье 87 Трудового кодекса РК оплачиваемый ежегодный трудовой отпуск предоставляется работникам с сохранением средней заработной платы.Расчет средней заработной платы производится на основан...",
+      "prediction": "Okay, I need to answer the user's question about calculating vacation pay for shift workers in Kazakhstan who are paid by an hourly rate. The user is asking whether the vacation pay should be calculat...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.12705882352941178,
+        "gen_time": 10.84930944442749
+      }
+    },
+    {
+      "id": 81,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Добрый день! Подскажите пожалуйста, у меня строите...",
+      "reference": "Здравствуйте, Юлия!Исходя из предоставленных Вами данных, мы выделили следующие вопросы:1)На каком основании должен быть возмещен причиненный вред?2)Кем должен быть возмещен вред?ВГражданского кодекса...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani law. The user is asking if it's legal for neighbors to sue them, the owner of the apartment, for damages caused by their employee during a renovation...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.07142857142857142,
+        "length_ratio": 0.5633802816901409,
+        "gen_time": 11.841340065002441
+      }
+    },
+    {
+      "id": 82,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Есть ли в трудовом кодексе статья о дополнительном...",
+      "reference": "Данную норму регулирует статья 97 Трудового Кодекса РК, а именно:По соглашению сторон трудового договора на основании заявления работника ему может быть предоставлен отпуск без сохранения заработной п...",
+      "prediction": "Да, в Трудовом кодексе Республики Казахстан предусмотрены дополнительные гарантии для работников, связанные с рождением ребенка. Согласно статье 122 Трудового кодекса РК, работнику предоставляется доп...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.3333333333333333,
+        "length_ratio": 0.07803468208092486,
+        "gen_time": 11.12820839881897
+      }
+    },
+    {
+      "id": 83,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Возможно ли по Договору оказания возвратной финанс...",
+      "reference": "Согласно пункту 1 статьи 715 Гражданского кодекса Республики Казахстан (далее – ГК РК) по договору займа одна сторона (заимодатель) передает, а в случаях, предусмотренных ГК РК или договором, обязуетс...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani legislation regarding a financial assistance agreement with a non-resident legal entity and partial repayment to a physical person (the director) who...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.08977556109725686,
+        "gen_time": 10.902477264404297
+      }
+    },
+    {
+      "id": 84,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Чем различается срок рассмотрения заявлений для участков в городе и вне его?",
+      "input": "",
+      "reference": "В городе — до 8 дней, за пределами — до 16 дней.",
+      "prediction": "Okay, I need to figure out the difference in processing times for applications within a city versus outside of it. Let me start by recalling any information I have about administrative procedures. Usu...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.027713625866050806,
+        "gen_time": 11.432757139205933
+      }
+    },
+    {
+      "id": 85,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Бас Прокурор кімге есеп береді?",
+      "input": "",
+      "reference": "Қазақстан Республикасының Президентіне.",
+      "prediction": "Okay, the user is asking, \"Бас Прокурор кімге есеп береді?\" which translates to \"Who does the Chief Prosecutor report to?\" in Kazakh. Let me break this down.\n\nFirst, I need to recall the structure of ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.008771929824561403,
+        "gen_time": 11.661898851394653
+      }
+    },
+    {
+      "id": 86,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Почему для земель сельскохозяйственного назначения установлен двухлетний срок неоплаты?",
+      "input": "",
+      "reference": "Потому что доходность от сельхозземель оценивается по сезонам.",
+      "prediction": "Okay, the user is asking why there's a two-year payment deferral for agricultural land. Let me start by recalling the relevant laws. In Russia, the Federal Law No. 137-FZ from 2006 regulates land use....",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 1.0,
+        "length_ratio": 0.026058631921824105,
+        "gen_time": 11.588247299194336
+      }
+    },
+    {
+      "id": 87,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Работник организации подотчетное лицо, приложил к ...",
+      "reference": "В соответствии с подпунктом 1) пункта 1 статьи 244 Налогового кодекса вычету подлежат расходы на проезд к месту командировки и обратно, включая оплату расходов за бронь, на основании документов, подтв...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani legislation regarding an employee's expense report. The user is asking whether a company (TOO) can include expenses in its costs if the employee's bu...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.09448818897637795,
+        "gen_time": 11.583564519882202
+      }
+    },
+    {
+      "id": 88,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Почему важно учитывать целевое назначение земли при залоге здания?",
+      "input": "",
+      "reference": "Чтобы не нарушать установленное использование участка.",
+      "prediction": "Okay, the user is asking why it's important to consider the land use designation when mortgaging a building. Let me start by recalling what land use designations are. They're legal classifications tha...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.01518987341772152,
+        "gen_time": 10.748177289962769
+      }
+    },
+    {
+      "id": 89,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Тәркілеу кезінде меншік иесінің қандай құқықтары бар?",
+      "input": "",
+      "reference": "Ол өтемақы алады.",
+      "prediction": "Okay, the user is asking about the rights of the property owner during the liquidation process. Let me start by recalling what liquidation entails. Liquidation is when a company's assets are sold off ...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.009933774834437085,
+        "gen_time": 10.542790651321411
+      }
+    },
+    {
+      "id": 90,
+      "language": "ru",
+      "domain": "labor",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Учитывается ли период отпуска без сохранения зараб...",
+      "reference": "В статье 91 Трудового Кодекса РК указано что входит в  трудовой стаж при предоставлении оплачиваемого ежегодного трудового отпуска, т.е. за какие периоды начисляются дни трудового отпуска:",
+      "prediction": "Нет, период отпуска без сохранения заработной платы не учитывается при начислении трудового отпуска. Согласно статье 123 Трудового кодекса Республики Казахстан, трудовой отпуск предоставляется в соотв...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 1.0,
+        "key_info": 0.5,
+        "length_ratio": 0.087248322147651,
+        "gen_time": 9.376658916473389
+      }
+    },
+    {
+      "id": 91,
+      "language": "kz",
+      "domain": "other",
+      "instruction": "Қолтаңбалардың дұрыстығын кім тексереді?",
+      "input": "",
+      "reference": "Қолтаңбаларды аудандық немесе қалалық сайлау комиссиясы тексереді.",
+      "prediction": "Okay, the user is asking, \"Who checks the correctness of signatures?\" in Kazakh. Let me break this down.\n\nFirst, I need to understand the context. Signatures can be checked in various scenarios: legal...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.024054982817869417,
+        "gen_time": 10.616408348083496
+      }
+    },
+    {
+      "id": 92,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "ТОО заключило договор на техническое обслуживание ...",
+      "reference": "В соответствии с подпунктом 1) пункта 1 статьи 369 Кодекса Республики Казахстан от 25 декабря 2017 года № 120-VI «О налогах и других обязательных платежах в бюджет» (далее - Налоговый кодекс) облагаем...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani tax law. The user is asking whether the salary paid to a lift operator by a company that's providing maintenance services under a contract with a TOO...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.0,
+        "length_ratio": 0.1203931203931204,
+        "gen_time": 11.017851829528809
+      }
+    },
+    {
+      "id": 93,
+      "language": "ru",
+      "domain": "tax",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "ТОО на Упрощенном режиме налогообложения, не плате...",
+      "reference": "В соответствии с пунктом 1 статьи 40 Закона РК от 22 апреля 1998 года № 220-I «О товариществах с ограниченной и дополнительной ответственностью», распределение между участниками товарищества с огранич...",
+      "prediction": "Okay, let's tackle this question about Kazakhstani tax law. The user is asking whether a resolution from the sole shareholder of a TOO (a company) and a directive (приказ) to implement the decision ar...",
+      "metrics": {
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.09069212410501193,
+        "gen_time": 10.514355182647705
+      }
+    },
+    {
+      "id": 94,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Салық декларациясы мен салық есептілігінің айырмашылығы неде?",
+      "input": "",
+      "reference": "Өтініш құқықтарды жүзеге асыру үшін, ал есептілік салықтарды есептеу үшін қолданылады.",
+      "prediction": "Okay, I need to explain the difference between a tax declaration and a tax return. Let me start by recalling what each term means. A tax declaration is probably the initial step where a taxpayer repor...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.030640668523676882,
+        "gen_time": 10.50178599357605
+      }
+    },
+    {
+      "id": 95,
+      "language": "ru",
+      "domain": "constitutional",
+      "instruction": "Каким образом возврат взноса связан с конституционными принципами справедливости и подотчётности?",
+      "input": "",
+      "reference": "Он обеспечивает справедливость — возвращение средств только тем, кто получил доверие избирателей.",
+      "prediction": "Okay, I need to figure out how the refund of contributions relates to constitutional principles of justice and accountability. Let me start by recalling what these principles mean. Justice in a consti...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.03125,
+        "gen_time": 10.504590272903442
+      }
+    },
+    {
+      "id": 96,
+      "language": "ru",
+      "domain": "civil",
+      "instruction": "Ответь на вопрос по казахстанскому законодательству.",
+      "input": "Здравствуйте, ситуация такая: продал машину получи...",
+      "reference": "Здравствуйте, Юрий!Для начала стоит отметить, что, выписав доверенность, Вы не передали машину в собственность покупателя. В соответствии соГК РК, доверенностью признается письменное уполномочие одног...",
+      "prediction": "Okay, let's see. The user sold a car, deregistered it, and gave the title to his wife, who's from another city. The buyer came back the next day saying the transmission is broken and wants a refund. T...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.15324675324675324,
+        "gen_time": 10.510458946228027
+      }
+    },
+    {
+      "id": 97,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Как  принцип  публичности  в  правотворчестве  влияет  на  эффективность  и  легитимность  нормативн...",
+      "input": "",
+      "reference": "Принцип публичности в правотворчестве предполагает  открытость  процесса  создания  и  изменения  нормативных  правовых  актов.  Он  обеспечивает  возможность  общественного  контроля  и  участия  в  ...",
+      "prediction": "Okay, I need to answer how the principle of publicity in lawmaking affects the effectiveness and legitimacy of normative legal acts, and what mechanisms ensure its implementation. Let me start by reca...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 0.5,
+        "length_ratio": 0.16911764705882354,
+        "gen_time": 10.50076413154602
+      }
+    },
+    {
+      "id": 98,
+      "language": "ru",
+      "domain": "other",
+      "instruction": "Какие нормативные акты лежат в основе изменений в Правилах благоустройства?",
+      "input": "",
+      "reference": "Изменения основаны на нескольких ключевых законодательных актах, регулирующих архитектурную, градостроительную и строительную деятельность, а также местное самоуправление.  Это законы, определяющие об...",
+      "prediction": "Нормативные акты, лежащие в основе изменений в Правилах благоустройства, включают в себя:\n\n1. **Федеральный закон от 03.07.2016 № 297-ФЗ \"О благоустройстве\"** – основной закон, регулирующий вопросы бл...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 1.0,
+        "key_info": 1.0,
+        "length_ratio": 0.33519553072625696,
+        "gen_time": 10.482791900634766
+      }
+    },
+    {
+      "id": 99,
+      "language": "kz",
+      "domain": "tax",
+      "instruction": "Салықтық тексеру актісіне қосымшаларды жасау қалай реттеледі?",
+      "input": "",
+      "reference": "Қосымшаларға тексеру нәтижелерін растайтын құжаттар мен есептеулер кіреді.",
+      "prediction": "Okay, the user is asking about how to properly prepare appendices for a tax audit act. Let me break this down.\n\nFirst, I need to recall the standard procedures for tax audits in the relevant jurisdict...",
+      "metrics": {
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "key_info": 1.0,
+        "length_ratio": 0.023529411764705882,
+        "gen_time": 10.474018096923828
+      }
+    }
+  ]
+}
