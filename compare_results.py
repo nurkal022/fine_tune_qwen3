@@ -72,11 +72,16 @@ def print_scaling_table(results: List[Dict]):
 
     for r in sorted(results, key=lambda x: (x.get('is_baseline', False), model_label(x))):
         avg = r['avg_metrics']
+        ci = r.get('confidence_intervals', {})
         label = model_label(r)
         row = f"{label:<25} {r['num_samples']:>4}"
         for m in key_metrics:
             val = avg.get(m, 0)
-            row += f" {val*100:>7.1f}%"
+            if m in ci:
+                c = ci[m]
+                row += f" {val*100:>5.1f}%±{(c['ci_upper']-c['ci_lower'])*50:>3.1f}"
+            else:
+                row += f" {val*100:>7.1f}%  "
         row += f" {avg.get('gen_time', 0):>7.2f}"
         gpu = r.get('gpu', {})
         if gpu:
@@ -206,10 +211,17 @@ def export_markdown(results: List[Dict], output_file: str):
 
     for r in sorted(results, key=lambda x: (x.get('is_baseline', False), model_label(x))):
         avg = r['avg_metrics']
+        ci = r.get('confidence_intervals', {})
         label = model_label(r)
         cols = [label]
         for m in key_metrics:
-            cols.append(f"{avg.get(m, 0)*100:.1f}%")
+            val = avg.get(m, 0)
+            if m in ci:
+                c = ci[m]
+                half_width = (c['ci_upper'] - c['ci_lower']) / 2
+                cols.append(f"{val*100:.1f}% ± {half_width*100:.1f}")
+            else:
+                cols.append(f"{val*100:.1f}%")
         cols.append(f"{avg.get('gen_time', 0):.2f}")
         lines.append("| " + " | ".join(cols) + " |")
 

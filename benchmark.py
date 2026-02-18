@@ -14,6 +14,7 @@ import time
 import argparse
 import torch
 import random
+import numpy as np
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Tuple, Set
@@ -298,11 +299,17 @@ def run_benchmark(model, tokenizer, test_data: List[Dict],
     # Per-language breakdown
     lang_metrics = compute_breakdown(results, 'language')
 
+    # Bootstrap confidence intervals
+    print("Computing bootstrap confidence intervals...")
+    np.random.seed(42)
+    confidence_intervals = compute_bootstrap_ci(results)
+
     return {
         'num_samples': num_samples,
         'total_time': total_gen_time,
         'avg_time_per_sample': total_gen_time / num_samples,
         'avg_metrics': avg_metrics,
+        'confidence_intervals': confidence_intervals,
         'by_domain': domain_metrics,
         'by_language': lang_metrics,
         'results': results,
@@ -327,6 +334,38 @@ def compute_breakdown(results: List[Dict], key: str) -> Dict:
             'metrics': {k: v / n for k, v in avg.items()},
         }
     return breakdown
+
+
+# ============== BOOTSTRAP CONFIDENCE INTERVALS ==============
+
+def compute_bootstrap_ci(results: List[Dict], n_bootstrap: int = 1000,
+                         ci: float = 0.95) -> Dict[str, Dict]:
+    """Compute bootstrap 95% confidence intervals for all metrics."""
+    if not results:
+        return {}
+
+    metric_keys = [k for k in results[0]['metrics'].keys() if k != 'gen_time']
+    n = len(results)
+    alpha = (1 - ci) / 2
+
+    ci_results = {}
+    for key in metric_keys:
+        values = np.array([r['metrics'].get(key, 0) for r in results])
+        boot_means = np.array([
+            np.mean(np.random.choice(values, size=n, replace=True))
+            for _ in range(n_bootstrap)
+        ])
+        lower = float(np.percentile(boot_means, alpha * 100))
+        upper = float(np.percentile(boot_means, (1 - alpha) * 100))
+        mean = float(np.mean(values))
+        ci_results[key] = {
+            'mean': mean,
+            'ci_lower': lower,
+            'ci_upper': upper,
+            'std': float(np.std(values)),
+        }
+
+    return ci_results
 
 
 # ============== OUTPUT ==============
@@ -355,11 +394,15 @@ def print_results(benchmark_results: Dict, model_name: str, is_baseline: bool):
           f"Total: {benchmark_results['total_time']:.1f}s, "
           f"Avg latency: {avg.get('gen_time', 0):.2f}s")
 
-    print(f"\n--- Overall Metrics ---")
+    ci = benchmark_results.get('confidence_intervals', {})
+    print(f"\n--- Overall Metrics (95% CI) ---")
     for key, name in METRIC_NAMES:
         if key in avg:
             if key == 'gen_time':
                 print(f"  {name:<20} {avg[key]:.2f}")
+            elif key in ci:
+                c = ci[key]
+                print(f"  {name:<20} {avg[key]*100:.2f}%  [{c['ci_lower']*100:.2f}%, {c['ci_upper']*100:.2f}%]")
             else:
                 print(f"  {name:<20} {avg[key]*100:.2f}%")
 
@@ -420,6 +463,7 @@ def save_results(benchmark_results: Dict, model_name: str,
         'num_samples': benchmark_results['num_samples'],
         'total_time': benchmark_results['total_time'],
         'avg_metrics': benchmark_results['avg_metrics'],
+        'confidence_intervals': benchmark_results.get('confidence_intervals', {}),
         'by_domain': benchmark_results['by_domain'],
         'by_language': benchmark_results['by_language'],
         'gpu': gpu_info,
