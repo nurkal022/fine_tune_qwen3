@@ -1,0 +1,203 @@
+{
+  "model": "unsloth/Qwen3-4B-unsloth-bnb-4bit",
+  "corpus_size": 56802,
+  "num_samples": 200,
+  "top_k_values": [
+    1,
+    3,
+    5
+  ],
+  "timestamp": "2026-02-21T15:59:27.407122",
+  "Base only": {
+    "config": {
+      "name": "Base only",
+      "top_k": 0
+    },
+    "num_samples": 200,
+    "total_time": 1972.7057378292084,
+    "avg_metrics": {
+      "citation_accuracy": 0.7350000000000005,
+      "hallucination_rate": 0.2175000000000001,
+      "key_info": 0.6945277777777772,
+      "length_ratio": 0.19466977816074246,
+      "gen_time": 9.863528689146042,
+      "bertscore_f1": 0.8261111277341838
+    },
+    "confidence_intervals": {
+      "citation_accuracy": {
+        "mean": 0.735,
+        "ci_lower": 0.6798750000000001,
+        "ci_upper": 0.795,
+        "std": 0.4413332074521472
+      },
+      "hallucination_rate": {
+        "mean": 0.2175,
+        "ci_lower": 0.1625,
+        "ci_upper": 0.275,
+        "std": 0.4110276754672367
+      },
+      "key_info": {
+        "mean": 0.6945277777777779,
+        "ci_lower": 0.6494298611111111,
+        "ci_upper": 0.7415440476190477,
+        "std": 0.33516240331064956
+      },
+      "length_ratio": {
+        "mean": 0.1946697781607423,
+        "ci_lower": 0.17048227023452395,
+        "ci_upper": 0.217925830119578,
+        "std": 0.18049339900871136
+      },
+      "bertscore_f1": {
+        "mean": 0.8261111277341843,
+        "ci_lower": 0.821666684821248,
+        "ci_upper": 0.8301694321855903,
+        "std": 0.030461528278874224
+      }
+    }
+  },
+  "Base + RAG (top-1)": {
+    "config": {
+      "name": "Base + RAG (top-1)",
+      "top_k": 1
+    },
+    "num_samples": 200,
+    "total_time": 2024.1644871234894,
+    "avg_metrics": {
+      "citation_accuracy": 0.7558333333333339,
+      "hallucination_rate": 0.3591666666666669,
+      "key_info": 0.7198747502497499,
+      "length_ratio": 0.18499063759667786,
+      "gen_time": 10.120822435617448,
+      "bertscore_f1": 0.8281899616122247
+    },
+    "confidence_intervals": {
+      "citation_accuracy": {
+        "mean": 0.7558333333333332,
+        "ci_lower": 0.6975,
+        "ci_upper": 0.8133333333333335,
+        "std": 0.4255315303633014
+      },
+      "hallucination_rate": {
+        "mean": 0.3591666666666667,
+        "ci_lower": 0.29583333333333334,
+        "ci_upper": 0.42833333333333334,
+        "std": 0.47349102420214895
+      },
+      "key_info": {
+        "mean": 0.7198747502497502,
+        "ci_lower": 0.6745109803391053,
+        "ci_upper": 0.764453878066378,
+        "std": 0.31508214312518695
+      },
+      "length_ratio": {
+        "mean": 0.18499063759667791,
+        "ci_lower": 0.16022928244191614,
+        "ci_upper": 0.21110374822037858,
+        "std": 0.18693870494579826
+      },
+      "bertscore_f1": {
+        "mean": 0.8281899616122246,
+        "ci_lower": 0.8244772635921837,
+        "ci_upper": 0.8316411873549223,
+        "std": 0.026518169903612936
+      }
+    }
+  },
+  "Base + RAG (top-3)": {
+    "config": {
+      "name": "Base + RAG (top-3)",
+      "top_k": 3
+    },
+    "num_samples": 200,
+    "total_time": 2163.2850711345673,
+    "avg_metrics": {
+      "citation_accuracy": 0.7808333333333338,
+      "hallucination_rate": 0.30925000000000014,
+      "key_info": 0.725997828560328,
+      "length_ratio": 0.18151166837563654,
+      "gen_time": 10.816425355672836,
+      "bertscore_f1": 0.8313281995058062
+    },
+    "confidence_intervals": {
+      "citation_accuracy": {
+        "mean": 0.7808333333333333,
+        "ci_lower": 0.7270625000000001,
+        "ci_upper": 0.83421875,
+        "std": 0.40132679258235976
+      },
+      "hallucination_rate": {
+        "mean": 0.30925,
+        "ci_lower": 0.25049375,
+        "ci_upper": 0.3775,
+        "std": 0.449557490761749
+      },
+      "key_info": {
+        "mean": 0.7259978285603285,
+        "ci_lower": 0.6876264766483516,
+        "ci_upper": 0.767933290494228,
+        "std": 0.30057297343017797
+      },
+      "length_ratio": {
+        "mean": 0.1815116683756365,
+        "ci_lower": 0.15724427671204047,
+        "ci_upper": 0.2047351672929197,
+        "std": 0.17774758525033058
+      },
+      "bertscore_f1": {
+        "mean": 0.8313281995058059,
+        "ci_lower": 0.8270372791662812,
+        "ci_upper": 0.8353462263196707,
+        "std": 0.030203089709948006
+      }
+    }
+  },
+  "Base + RAG (top-5)": {
+    "config": {
+      "name": "Base + RAG (top-5)",
+      "top_k": 5
+    },
+    "num_samples": 200,
+    "total_time": 2288.436939716339,
+    "avg_metrics": {
+      "citation_accuracy": 0.8030833333333338,
+      "hallucination_rate": 0.3589166666666669,
+      "key_info": 0.7370146312021306,
+      "length_ratio": 0.17053261675108886,
+      "gen_time": 11.442184698581693,
+      "bertscore_f1": 0.8322053799033164
+    },
+    "confidence_intervals": {
+      "citation_accuracy": {
+        "mean": 0.8030833333333334,
+        "ci_lower": 0.7512333333333333,
+        "ci_upper": 0.8532729166666665,
+        "std": 0.3744628653151071
+      },
+      "hallucination_rate": {
+        "mean": 0.35891666666666666,
+        "ci_lower": 0.2954541666666667,
+        "ci_upper": 0.42226458333333333,
+        "std": 0.45674232189617714
+      },
+      "key_info": {
+        "mean": 0.7370146312021312,
+        "ci_lower": 0.6989356782106781,
+        "ci_upper": 0.7775809997294372,
+        "std": 0.28571165926437364
+      },
+      "length_ratio": {
+        "mean": 0.17053261675108886,
+        "ci_lower": 0.14752018923688673,
+        "ci_upper": 0.19331163042043226,
+        "std": 0.17012869318534374
+      },
+      "bertscore_f1": {
+        "mean": 0.8322053799033164,
+        "ci_lower": 0.8282198864668607,
+        "ci_upper": 0.836083625279367,
+        "std": 0.028284592484208265
+      }
+    }
+  }
+}
