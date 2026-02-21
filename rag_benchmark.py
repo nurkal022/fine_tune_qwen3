@@ -144,12 +144,13 @@ def format_context(docs: List[Dict]) -> str:
 
 def run_rag_benchmark(model, tokenizer, test_data: List[Dict],
                       corpus: List[Dict], vectorizer, tfidf_matrix,
-                      top_k_values: List[int], max_new_tokens: int = 512) -> Dict:
-    """Run RAG ablation: FT only vs FT+RAG with different top-k values."""
+                      top_k_values: List[int], max_new_tokens: int = 512,
+                      model_tag: str = "FT") -> Dict:
+    """Run RAG ablation with different top-k values. model_tag: 'FT' or 'Base'."""
 
-    configs = [{'name': 'FT only', 'top_k': 0}]
+    configs = [{'name': f'{model_tag} only', 'top_k': 0}]
     for k in top_k_values:
-        configs.append({'name': f'FT + RAG (top-{k})', 'top_k': k})
+        configs.append({'name': f'{model_tag} + RAG (top-{k})', 'top_k': k})
 
     all_results = {}
 
@@ -293,12 +294,13 @@ def print_rag_table(all_results: Dict):
         row += f" {avg.get('gen_time', 0):>7.2f}"
         print(row)
 
-    # Delta vs FT only
-    if 'FT only' in all_results:
-        base = all_results['FT only']['avg_metrics']
-        print(f"\n--- Delta vs FT only ---")
+    # Delta vs "X only" (first config)
+    first_name = list(all_results.keys())[0]
+    if first_name in all_results:
+        base = all_results[first_name]['avg_metrics']
+        print(f"\n--- Delta vs {first_name} ---")
         for name, data in all_results.items():
-            if name == 'FT only':
+            if name == first_name:
                 continue
             avg = data['avg_metrics']
             parts = [f"{name:<25}"]
@@ -311,7 +313,9 @@ def print_rag_table(all_results: Dict):
 
 def main():
     parser = argparse.ArgumentParser(description='RAG Ablation Benchmark (Experiment 3)')
-    parser.add_argument('--model', type=str, required=True, help='Fine-tuned model path')
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--model', type=str, help='Fine-tuned model path (LoRA adapter)')
+    group.add_argument('--baseline', type=str, help='Base model name (e.g. unsloth/Qwen3-4B-unsloth-bnb-4bit)')
     parser.add_argument('--corpus', type=str, required=True, help='Corpus path (training data JSONL)')
     parser.add_argument('--samples', type=int, default=100, help='Number of test samples')
     parser.add_argument('--top-k', nargs='+', type=int, default=[1, 3, 5], help='Top-k values')
@@ -319,16 +323,20 @@ def main():
     parser.add_argument('--max-tokens', type=int, default=512, help='Max new tokens')
     args = parser.parse_args()
 
+    is_baseline = args.baseline is not None
+    model_path = args.baseline if is_baseline else args.model
+    tag = "Base" if is_baseline else "FT"
+
     print("=" * 60)
-    print(f"RAG ABLATION BENCHMARK")
-    print(f"Model: {args.model}")
+    print(f"RAG ABLATION BENCHMARK ({tag})")
+    print(f"Model: {model_path}")
     print(f"Corpus: {args.corpus}")
     print(f"Samples: {args.samples}")
     print(f"Top-k: {args.top_k}")
     print("=" * 60)
 
-    if not Path(args.model).exists():
-        print(f"ERROR: Model not found: {args.model}")
+    if not is_baseline and not Path(model_path).exists():
+        print(f"ERROR: Model not found: {model_path}")
         return
 
     # Load corpus (training data)
@@ -345,9 +353,9 @@ def main():
     print("Index ready")
 
     # Load model
-    print(f"\nLoading model: {args.model}")
+    print(f"\nLoading model: {model_path}")
     model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name=args.model, max_seq_length=2048, dtype=None, load_in_4bit=True,
+        model_name=model_path, max_seq_length=2048, dtype=None, load_in_4bit=True,
     )
     FastLanguageModel.for_inference(model)
 
@@ -365,7 +373,7 @@ def main():
     # Run benchmark
     all_results = run_rag_benchmark(
         model, tokenizer, data, corpus, vectorizer, tfidf_matrix,
-        args.top_k, args.max_tokens
+        args.top_k, args.max_tokens, model_tag=tag
     )
 
     # Print results table
@@ -373,11 +381,12 @@ def main():
 
     # Save results
     if args.output is None:
-        args.output = "results/rag_ablation.json"
+        suffix = "base" if is_baseline else "ft"
+        args.output = f"results/rag_ablation_{suffix}.json"
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
 
     save_data = {
-        'model': args.model,
+        'model': model_path,
         'corpus_size': len(corpus),
         'num_samples': args.samples,
         'top_k_values': args.top_k,
