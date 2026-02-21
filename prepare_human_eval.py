@@ -113,9 +113,27 @@ def prepare_from_results(result_files: list, num_questions: int = 50):
     out_dir = Path("human_eval")
     out_dir.mkdir(exist_ok=True)
 
-    # CSV for evaluators
+    # CSV with Russian headers for evaluators
+    ru_fieldnames = [
+        'номер_вопроса', 'вопрос', 'контекст', 'эталонный_ответ',
+        'вариант', 'ответ_модели',
+        'корректность_1_5', 'полнота_1_5', 'релевантность_1_5',
+        'галлюцинация_да_нет', 'комментарий'
+    ]
     csv_file = out_dir / f"eval_sheet_{timestamp}.csv"
-    with open(csv_file, 'w', encoding='utf-8', newline='') as f:
+    with open(csv_file, 'w', encoding='utf-8-sig', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(ru_fieldnames)
+        for row in eval_rows:
+            writer.writerow([
+                row['question_id'], row['question'], row['context'],
+                row['reference_answer'], row['answer_id'], row['model_answer'],
+                '', '', '', '', ''
+            ])
+
+    # English CSV (for processing)
+    csv_en_file = out_dir / f"eval_sheet_en_{timestamp}.csv"
+    with open(csv_en_file, 'w', encoding='utf-8', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=eval_rows[0].keys())
         writer.writeheader()
         writer.writerows(eval_rows)
@@ -130,14 +148,59 @@ def prepare_from_results(result_files: list, num_questions: int = 50):
     with open(json_file, 'w', encoding='utf-8') as f:
         json.dump(eval_rows, f, ensure_ascii=False, indent=2)
 
-    print(f"\nEvaluation sheet: {csv_file}")
-    print(f"Model key (secret): {key_file}")
-    print(f"JSON version: {json_file}")
+    # Instructions file for evaluators (Russian)
+    instr_file = out_dir / "ИНСТРУКЦИЯ.txt"
+    with open(instr_file, 'w', encoding='utf-8') as f:
+        f.write("""ИНСТРУКЦИЯ ДЛЯ ЭКСПЕРТНОЙ ОЦЕНКИ ОТВЕТОВ ИИ-МОДЕЛИ
+===================================================
+
+Вам предоставлены 50 юридических вопросов по казахстанскому законодательству.
+На каждый вопрос даны 4 ответа (A, B, C, D) от РАЗНЫХ моделей.
+Вы НЕ знаете, какая модель сгенерировала какой ответ.
+
+Для каждого ответа оцените по шкале от 1 до 5:
+
+1. КОРРЕКТНОСТЬ (корректность_1_5):
+   1 = полностью неверный ответ, ошибки в законодательстве
+   2 = частично верный, но с существенными ошибками
+   3 = в целом верный, но есть неточности
+   4 = верный ответ с незначительными неточностями
+   5 = полностью корректный и точный ответ
+
+2. ПОЛНОТА (полнота_1_5):
+   1 = ответ не раскрывает вопрос
+   2 = ответ поверхностный, упущены ключевые аспекты
+   3 = основные аспекты раскрыты, но есть пробелы
+   4 = ответ достаточно полный
+   5 = исчерпывающий ответ, все аспекты раскрыты
+
+3. РЕЛЕВАНТНОСТЬ (релевантность_1_5):
+   1 = ответ не по теме
+   2 = частично по теме
+   3 = по теме, но есть лишняя информация
+   4 = релевантный ответ
+   5 = точно по теме, без лишнего
+
+4. ГАЛЛЮЦИНАЦИЯ (галлюцинация_да_нет):
+   да = ответ содержит выдуманные нормы, несуществующие статьи или ложные ссылки
+   нет = все ссылки и нормы корректны (или ответ не содержит ссылок)
+
+5. КОММЕНТАРИЙ (необязательно):
+   Любые замечания к ответу.
+
+ВАЖНО:
+- Сравнивайте ответ модели с ЭТАЛОННЫМ ОТВЕТОМ
+- Оценивайте объективно, не зная какая модель дала ответ
+- Если ответ на другом языке (не RU/KZ) — ставьте 1 по всем критериям
+""")
+
+    print(f"\nEvaluation sheet (RU): {csv_file}")
+    print(f"Evaluation sheet (EN): {csv_en_file}")
+    print(f"Model key (secret):    {key_file}")
+    print(f"Instructions:          {instr_file}")
     print(f"\nTotal rows: {len(eval_rows)} ({len(common_ids)} questions x {len(all_results)} models)")
-    print(f"\nInstructions for evaluators:")
-    print(f"  - Rate each answer on a 1-5 scale for correctness, completeness, relevance")
-    print(f"  - Mark hallucination: yes/no (does the answer contain fabricated legal norms?)")
-    print(f"  - Answers are shuffled — evaluator does NOT know which model generated which answer")
+    print(f"\nДля юристов: отправьте {csv_file} + ИНСТРУКЦИЯ.txt")
+    print(f"model_key — НЕ отправлять юристам (секретный ключ)")
 
 
 def prepare_live(model_paths: list, baseline_paths: list, num_questions: int = 50):
