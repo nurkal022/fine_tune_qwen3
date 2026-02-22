@@ -144,7 +144,7 @@ def format_context(docs: List[Dict]) -> str:
 
 def run_rag_benchmark(model, tokenizer, test_data: List[Dict],
                       corpus: List[Dict], vectorizer, tfidf_matrix,
-                      top_k_values: List[int], max_new_tokens: int = 512,
+                      top_k_values: List[int], max_new_tokens: int = 1024,
                       model_tag: str = "FT") -> Dict:
     """Run RAG ablation with different top-k values. model_tag: 'FT' or 'Base'."""
 

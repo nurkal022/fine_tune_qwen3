@@ -204,9 +204,10 @@ def prepare_from_results(result_files: list, num_questions: int = 50):
 
 
 def prepare_live(model_paths: list, baseline_paths: list, num_questions: int = 50):
-    """Generate responses live from models (requires GPU)."""
+    """Generate responses live from models (requires GPU). Full text, no truncation."""
     from unsloth import FastLanguageModel
     from config import ALPACA_PROMPT
+    from tqdm import tqdm
 
     val_data = load_val_data(num_questions)
     all_models = []
@@ -231,20 +232,20 @@ def prepare_live(model_paths: list, baseline_paths: list, num_questions: int = 5
 
         import torch
         results = {}
-        for i, sample in enumerate(val_data):
+        for i, sample in enumerate(tqdm(val_data, desc=f"Generating ({tag}: {Path(model_path).name})")):
             prompt = ALPACA_PROMPT.format(sample['instruction'], sample.get('input', ''), "")
             inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
             with torch.no_grad():
-                outputs = model.generate(**inputs, max_new_tokens=512,
+                outputs = model.generate(**inputs, max_new_tokens=1024,
                                          temperature=0.1, top_p=0.9, use_cache=True,
                                          pad_token_id=tokenizer.pad_token_id)
             response = tokenizer.decode(outputs[0][inputs.input_ids.shape[1]:], skip_special_tokens=True)
             results[i] = {
                 'id': i,
-                'instruction': sample['instruction'][:100],
-                'input': sample.get('input', '')[:50],
-                'reference': sample['output'][:200],
-                'prediction': response.strip()[:200],
+                'instruction': sample['instruction'],
+                'input': sample.get('input', ''),
+                'reference': sample['output'],
+                'prediction': response.strip(),
             }
 
         # Save as temporary result file

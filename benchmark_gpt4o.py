@@ -57,7 +57,7 @@ def query_gpt4o(client, instruction, input_text, model="gpt-4o-mini"):
         response = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=512,
+            max_tokens=1024,
             temperature=0.1,
         )
         return response.choices[0].message.content.strip()
@@ -142,9 +142,9 @@ def main():
             'id': i,
             'language': lang,
             'domain': domain,
-            'instruction': instruction[:100],
-            'prediction': prediction[:300],
-            'reference': reference[:200],
+            'instruction': instruction,
+            'prediction': prediction,
+            'reference': reference,
             'metrics': metrics,
         })
 

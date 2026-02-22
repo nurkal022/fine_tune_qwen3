@@ -193,7 +193,7 @@ def load_model(model_path: str):
 
 
 def generate_response(model, tokenizer, instruction: str, input_text: str,
-                      max_new_tokens: int = 512) -> Tuple[str, float]:
+                      max_new_tokens: int = 1024) -> Tuple[str, float]:
     prompt = ALPACA_PROMPT.format(instruction, input_text, "")
     inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
 
@@ -225,7 +225,7 @@ def compute_bertscore_batch(predictions: List[str], references: List[str]) -> Li
 
 
 def run_benchmark(model, tokenizer, test_data: List[Dict],
-                  max_new_tokens: int = 512) -> Dict:
+                  max_new_tokens: int = 1024) -> Dict:
     print("\n" + "=" * 60)
     print("RUNNING BENCHMARK")
     print("=" * 60)
@@ -276,10 +276,10 @@ def run_benchmark(model, tokenizer, test_data: List[Dict],
             'id': i,
             'language': lang,
             'domain': domain,
-            'instruction': instruction[:100] + '...' if len(instruction) > 100 else instruction,
-            'input': input_text[:50] + '...' if len(input_text) > 50 else input_text,
-            'reference': reference[:200] + '...' if len(reference) > 200 else reference,
-            'prediction': prediction[:200] + '...' if len(prediction) > 200 else prediction,
+            'instruction': instruction,
+            'input': input_text,
+            'reference': reference,
+            'prediction': prediction,
             'metrics': metrics,
         })
 
@@ -506,7 +506,7 @@ def parse_args():
     group.add_argument('--baseline', type=str, help='Base model name for baseline evaluation')
     parser.add_argument('--samples', type=int, default=100, help='Number of test samples')
     parser.add_argument('--output', type=str, default=None, help='Output JSON path')
-    parser.add_argument('--max-tokens', type=int, default=512, help='Max new tokens')
+    parser.add_argument('--max-tokens', type=int, default=1024, help='Max new tokens')
     return parser.parse_args()
 
 
