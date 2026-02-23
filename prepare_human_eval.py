@@ -57,6 +57,8 @@ def prepare_from_results(result_files: list, num_questions: int = 50):
         print("No results loaded!")
         return
 
+    random.seed(42)
+
     # Get question IDs present in ALL result files
     common_ids = set(all_results[0]['results'].keys())
     for r in all_results[1:]:
