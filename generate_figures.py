@@ -129,9 +129,9 @@ def fig2_scaling():
 
     # Add GPT-4o reference lines
     ax1.axhline(y=87.2, color=COLORS['gpt4o'], linestyle='--', alpha=0.7, linewidth=1.5)
-    ax1.text(2.4, 87.4, 'GPT-4o', color=COLORS['gpt4o'], fontsize=9, ha='right')
+    ax1.text(-0.4, 87.4, 'GPT-4o (87.2)', color=COLORS['gpt4o'], fontsize=8, ha='left')
     ax1.axhline(y=86.7, color=COLORS['gpt4o_mini'], linestyle=':', alpha=0.7, linewidth=1.5)
-    ax1.text(2.4, 86.0, 'GPT-4o-mini', color=COLORS['gpt4o_mini'], fontsize=9, ha='right')
+    ax1.text(-0.4, 85.9, 'GPT-4o-mini (86.7)', color=COLORS['gpt4o_mini'], fontsize=8, ha='left')
 
     # Citation Accuracy
     bars3 = ax2.bar(x - w/2, ft_cit, w, yerr=ft_cit_ci, capsize=5,
@@ -148,7 +148,7 @@ def fig2_scaling():
     ax2.bar_label(bars4, fmt='%.1f', padding=3, fontsize=9)
 
     ax2.axhline(y=76.3, color=COLORS['gpt4o'], linestyle='--', alpha=0.7, linewidth=1.5)
-    ax2.text(2.4, 76.6, 'GPT-4o', color=COLORS['gpt4o'], fontsize=9, ha='right')
+    ax2.text(-0.4, 76.8, 'GPT-4o (76.3)', color=COLORS['gpt4o'], fontsize=8, ha='left')
 
     plt.tight_layout()
     plt.savefig(OUT / "fig2_scaling_analysis.png")
@@ -400,21 +400,26 @@ def fig8_latency_quality():
     colors = [COLORS['ft']]*3 + [COLORS['gpt4o'], COLORS['gpt4o_mini']] + [COLORS['base']]*3
     sizes = [200 - h*1.5 for h in halluc]  # Larger = less hallucination
 
+    # Per-model label offsets to avoid overlap
+    label_offsets = {
+        '14B FT':      (8, 8),
+        '8B FT':       (8, -14),
+        '4B FT':       (-30, 10),
+        'GPT-4o':      (8, 8),
+        'GPT-4o-mini': (8, -12),
+        '14B Base':    (8, 8),
+        '8B Base':     (8, 8),
+        '4B Base':     (8, -12),
+    }
     for i, (m, b, l, h, c, s) in enumerate(zip(models, bert, latency, halluc, colors, sizes)):
-        ax.scatter(l, b, s=max(s, 40), c=c, alpha=0.85, edgecolors='white', linewidth=1.5, zorder=5)
-        offset_y = 0.4 if 'Base' not in m else -0.5
-        offset_x = 0.5
+        ax.scatter(l, b, s=max(s, 50), c=c, alpha=0.85, edgecolors='white', linewidth=1.5, zorder=5)
+        ox, oy = label_offsets.get(m, (8, 8))
         ax.annotate(m, (l, b), textcoords='offset points',
-                   xytext=(offset_x*10, offset_y*10), fontsize=9, fontweight='bold')
+                   xytext=(ox, oy), fontsize=9, fontweight='bold')
 
     ax.set_xlabel('Inference Latency (seconds)')
     ax.set_ylabel('BERTScore F1 (%)')
     ax.set_title('Quality vs Latency Trade-off (bubble size ∝ lower hallucination)')
-
-    # Highlight the optimal zone
-    ax.axhspan(89, 91, xmin=0, xmax=0.35, alpha=0.08, color=COLORS['ft'])
-    ax.text(1.5, 90.5, 'Optimal zone:\nHigh quality, low latency', fontsize=9,
-            color=COLORS['ft'], alpha=0.7, style='italic')
 
     ax.set_xlim(0, 35)
     ax.set_ylim(79, 92)
@@ -443,7 +448,6 @@ if __name__ == "__main__":
     fig2_scaling()
     fig3_domain()
     fig4_language()
-    fig5_rag()
     fig6_human_eval()
     fig7_model_comparison()
     fig8_latency_quality()
