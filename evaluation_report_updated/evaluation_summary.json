@@ -1,0 +1,33 @@
+{
+  "total_evaluations": 300,
+  "evaluation_date": "2026-02-23",
+  "criteria": {
+    "correctness": {
+      "name": "Корректность",
+      "scale": "1-5",
+      "description": "1 = полностью неверный, 5 = полностью корректный"
+    },
+    "completeness": {
+      "name": "Полнота",
+      "scale": "1-5",
+      "description": "1 = не раскрывает вопрос, 5 = исчерпывающий ответ"
+    },
+    "relevance": {
+      "name": "Релевантность",
+      "scale": "1-5",
+      "description": "1 = не по теме, 5 = точно по теме"
+    },
+    "hallucination": {
+      "name": "Галлюцинация",
+      "scale": "да/нет",
+      "description": "да = содержит выдуманные нормы, нет = все корректно"
+    }
+  },
+  "statistics": {
+    "average_correctness": 3.41,
+    "average_completeness": 3.11,
+    "average_relevance": 3.49,
+    "hallucinations_count": 4,
+    "hallucinations_percentage": 1.3
+  }
+}

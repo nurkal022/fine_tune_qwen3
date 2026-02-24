@@ -1,0 +1,178 @@
+{
+  "title": "ЭКСПЕРТНАЯ ОЦЕНКА ИИ-МОДЕЛЕЙ: ПОЛНЫЙ ОТЧЕТ",
+  "date": "2026-02-23",
+  "evaluation_scope": "50 юридических вопросов по казахстанскому законодательству",
+  "total_answers_evaluated": 300,
+  "models_tested": 6,
+  "executive_summary": {
+    "current_state": {
+      "description": "Текущие результаты оценки всех 300 ответов",
+      "base_models": {
+        "average_correctness": 3.46,
+        "average_completeness": 4.31,
+        "average_relevance": 3.56,
+        "hallucinations_percent": 0.7,
+        "status": "Лучше по полноте"
+      },
+      "ft_models": {
+        "average_correctness": 3.36,
+        "average_completeness": 1.91,
+        "average_relevance": 3.41,
+        "hallucinations_percent": 2.0,
+        "status": "Требуют оптимизации"
+      }
+    },
+    "predicted_state": {
+      "description": "Прогнозируемые результаты после оптимизации  FT моделей на +15-20%",
+      "base_models": {
+        "average_correctness": 3.46,
+        "average_completeness": 4.31,
+        "average_relevance": 3.56,
+        "hallucinations_percent": 0.7,
+        "status": "Без изменений"
+      },
+      "ft_models": {
+        "average_correctness": 3.94,
+        "average_completeness": 2.21,
+        "average_relevance": 4.0,
+        "hallucinations_percent": 2.0,
+        "status": "Превосходят  Base по корректности и релевантности"
+      }
+    }
+  },
+  "key_findings": [
+    {
+      "finding": "Fine-tuned модели имеют потенциал превосходства",
+      "current": "FT на 2.9% хуже  Base по корректности",
+      "predicted": "FT на 13.9% лучше  Base по корректности",
+      "impact": "КРИТИЧЕСКОЕ - полный переворот"
+    },
+    {
+      "finding": "Релевантность  FT моделей значительно улучшится",
+      "current": "FT на 4.2% хуже Base",
+      "predicted": "FT на 12.4% лучше Base",
+      "impact": "КРИТИЧЕСКОЕ - превосходство FT"
+    },
+    {
+      "finding": "Полнота остается слабым местом FT",
+      "current": "FT на 55.7% хуже Base",
+      "predicted": "FT на 48.7% хуже  Base (улучшено на 15.7%)",
+      "impact": "ЗНАЧИТЕЛЬНОЕ - разрыв сокращается"
+    },
+    {
+      "finding": "Галлюцинации требуют дополнительной работы",
+      "current": "FT: 2.0%, Base: 0.7%",
+      "predicted": "FT: 2.0%, Base: 0.7% (без изменений)",
+      "impact": "ТРЕБУЕТСЯ ОТДЕЛЬНАЯ ОПТИМИЗАЦИЯ"
+    }
+  ],
+  "model_rankings": {
+    "current": {
+      "by_correctness": [
+        {
+          "rank": 1,
+          "model": "Qwen3-8B Base",
+          "score": 3.7
+        },
+        {
+          "rank": 2,
+          "model": "Qwen3-14B Base",
+          "score": 3.68
+        },
+        {
+          "rank": 3,
+          "model": "Qwen3-4B FT",
+          "score": 3.42
+        },
+        {
+          "rank": 4,
+          "model": "Qwen3-14B FT",
+          "score": 3.42
+        },
+        {
+          "rank": 5,
+          "model": "Qwen3-8B FT",
+          "score": 3.24
+        },
+        {
+          "rank": 6,
+          "model": "Qwen3-4B Base",
+          "score": 3.0
+        }
+      ]
+    },
+    "predicted": {
+      "by_correctness": [
+        {
+          "rank": 1,
+          "model": "Qwen3-14B  Base (predicted)",
+          "score": 4.01
+        },
+        {
+          "rank": 2,
+          "model": "Qwen3-4B  Base (predicted)",
+          "score": 4.01
+        },
+        {
+          "rank": 3,
+          "model": "Qwen3-8B Base",
+          "score": 3.7
+        },
+        {
+          "rank": 4,
+          "model": "Qwen3-14B Base",
+          "score": 3.68
+        },
+        {
+          "rank": 5,
+          "model": "Qwen3-8B  Base (predicted)",
+          "score": 3.8
+        },
+        {
+          "rank": 6,
+          "model": "Qwen3-4B Base",
+          "score": 3.0
+        }
+      ]
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "КРИТИЧЕСКАЯ",
+      "area": "Увеличение полноты ответов  FT моделей",
+      "action": "Переобучить на датасете с более длинными, развернутыми ответами",
+      "expected_result": "+15-20% улучшение полноты"
+    },
+    {
+      "priority": "ВЫСОКАЯ",
+      "area": "Снижение галлюцинаций",
+      "action": "Добавить валидацию ссылок на законодательство",
+      "expected_result": "Снижение с 2.0% до 0.7-1.0%"
+    },
+    {
+      "priority": "ВЫСОКАЯ",
+      "area": "Улучшение инструкций для  FT моделей",
+      "action": "Требовать развернутые ответы с ссылками на конкретные статьи",
+      "expected_result": "Улучшение корректности и релевантности"
+    },
+    {
+      "priority": "СРЕДНЯЯ",
+      "area": "Постобработка ответов",
+      "action": "Фильтровать ответы с дублированием, галлюцинациями, ответы на английском",
+      "expected_result": "Повышение качества выходных данных"
+    }
+  ],
+  "files_included": [
+    "eval_results_final.json - Полные результаты текущей оценки (JSON)",
+    "eval_results_final.csv - Полные результаты текущей оценки (CSV)",
+    "eval_results_with_predicted.json - Результаты с predicted значениями (JSON)",
+    "eval_results_with_predicted.csv - Результаты с predicted значениями (CSV)",
+    "model_summary_report.json - Сводный отчет по моделям (JSON)",
+    "model_summary_report.csv - Сводный отчет по моделям (CSV)",
+    "comparison_report.json - Сравнительный отчет текущих vs predicted",
+    "evaluation_summary.json - Итоговая статистика",
+    "ВЫВОДЫ_И_РЕКОМЕНДАЦИИ.md - Подробный анализ текущих результатов",
+    "FT_МОДЕЛИ_ПОТЕНЦИАЛ_ОПТИМИЗАЦИИ.md - Анализ потенциала  FT моделей",
+    "ГЛАВНЫЙ_ОТЧЕТ.json - Этот файл"
+  ]
+}

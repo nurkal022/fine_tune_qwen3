@@ -1,0 +1,7 @@
+model,total_answers,avg_correctness,avg_completeness,avg_relevance,hallucinations_count,hallucinations_pct
+Qwen3-14B Base,50,3.68,4.7,3.66,0,0.0
+Qwen3-14B FT,50,3.42,1.9,3.5,0,0.0
+Qwen3-4B Base,50,3.0,3.58,3.4,0,0.0
+Qwen3-4B FT,50,3.42,1.96,3.48,2,4.0
+Qwen3-8B Base,50,3.7,4.66,3.62,1,2.0
+Qwen3-8B FT,50,3.24,1.86,3.26,1,2.0
